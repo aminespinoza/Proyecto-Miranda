@@ -1,0 +1,25 @@
+﻿<Page
+    x:Class="CienteUniversal.MainPage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:CienteUniversal"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d">
+
+    <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+        <Button x:Name="btnPolli" Content="Polli" HorizontalAlignment="Stretch" Height="40" Margin="10,10,10,0" VerticalAlignment="Top" d:LayoutOverrides="LeftPosition, RightPosition" Click="btnPolli_Click"/>
+        <Button x:Name="btnOscar" Content="Oscar" HorizontalAlignment="Stretch" Height="40" Margin="10,55,10,0" VerticalAlignment="Top" d:LayoutOverrides="LeftPosition, RightPosition" Click="btnOscar_Click"/>
+        <Button x:Name="btnTaller" Content="Taller" HorizontalAlignment="Stretch" Height="40" Margin="10,100,10,0" VerticalAlignment="Top" d:LayoutOverrides="LeftPosition, RightPosition" Click="btnTaller_Click"/>
+        <Button x:Name="btnBanoAbajoInt" Content="Baño Abajo Interior" HorizontalAlignment="Stretch" Height="40" Margin="10,145,10,0" VerticalAlignment="Top" d:LayoutOverrides="LeftPosition, RightPosition" Click="btnBanoAbajoInt_Click"/>
+        <Button x:Name="btnBanoAbajoExt" Content="Baño Abajo Exterior" HorizontalAlignment="Stretch" Height="40" Margin="10,190,10,0" VerticalAlignment="Top" d:LayoutOverrides="LeftPosition, RightPosition" Click="btnBanoAbajoExt_Click"/>
+        <Button x:Name="btnSala" Content="Sala" HorizontalAlignment="Stretch" Height="40" Margin="10,280,10,0" VerticalAlignment="Top" d:LayoutOverrides="LeftPosition, RightPosition" Click="btnSala_Click"/>
+        <Button x:Name="btnCocina" Content="Cocina" HorizontalAlignment="Stretch" Height="40" Margin="10,235,10,0" VerticalAlignment="Top" d:LayoutOverrides="LeftPosition, RightPosition" Click="btnCocina_Click"/>
+        <Button x:Name="btnPatio" Content="Patio" HorizontalAlignment="Stretch" Height="40" Margin="10,325,10,0" VerticalAlignment="Top" d:LayoutOverrides="LeftPosition, RightPosition" Click="btnPatio_Click"/>
+        <Button x:Name="btnBanoArribaInt" Content="Baño Arriba Interior" HorizontalAlignment="Stretch" Height="40" Margin="10,370,10,0" VerticalAlignment="Top" d:LayoutOverrides="LeftPosition, RightPosition" Click="btnBanoArribaInt_Click"/>
+        <Button x:Name="btnBanoArribaExt" Content="Baño Arriba Exterior" HorizontalAlignment="Stretch" Height="40" Margin="10,415,10,0" VerticalAlignment="Top" d:LayoutOverrides="LeftPosition, RightPosition" Click="btnBanoArribaExt_Click"/>
+        <Button x:Name="btnCuartoCosas" Content="Cuarto cosas" HorizontalAlignment="Stretch" Height="40" Margin="10,460,10,0" VerticalAlignment="Top" d:LayoutOverrides="LeftPosition, RightPosition" Click="btnCuartoCosas_Click"/>
+        <Button x:Name="btnVentilador" Content="Ventilador" HorizontalAlignment="Stretch" Height="40" Margin="10,505,10,0" VerticalAlignment="Top" d:LayoutOverrides="LeftPosition, RightPosition" Click="btnVentilador_Click"/>
+
+    </Grid>
+</Page>
