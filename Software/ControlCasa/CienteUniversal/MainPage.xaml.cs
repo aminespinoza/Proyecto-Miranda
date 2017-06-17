@@ -12,9 +12,9 @@ namespace CienteUniversal
     public sealed partial class MainPage : Page
     {
         static DeviceClient deviceClient;
-        static string iotHubUri = "hubcasatulancingo.azure-devices.net";
-        static string deviceKey = "aJpjn3jlGDSlcFrOJqjCxXmHtm8HyBC5HTXr+TQ7pK0=";
-        static string deviceId = "maquinaCasa";
+        static string iotHubUri = "nombredetuhub.azure-devices.net";
+        static string deviceKey = "deviceKey";
+        static string deviceId = "deviceName";
 
         bool luzPolliPrendida = false;
         bool luzOscarPrendida = false;

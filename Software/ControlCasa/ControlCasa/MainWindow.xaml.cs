@@ -14,7 +14,7 @@ namespace ControlCasa
     public partial class MainWindow : Window
     {
         static ServiceClient serviceClient;
-        static string connectionString = "HostName=hubcasatulancingo.azure-devices.net;SharedAccessKeyName=iothubowner;SharedAccessKey=kfSWlvhPZMFvWPs+oObC3bFAB5rlTUQ800Xo3lHGBoY=";
+        static string connectionString = "Tu cadena de conexión para IoT Hub";
         static string iotHubD2cEndpoint = "messages/events";
         static EventHubClient eventHubClient;
         EventHubReceiver eventHubReceiver;
