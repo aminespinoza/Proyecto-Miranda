@@ -106,17 +106,17 @@ namespace CienteUniversal
         {
             if (handler)
             {
-                EnviarInformaciónAlHub(light, "0");
+                SendDataToHub(light, "0");
             }
             else
             {
-                EnviarInformaciónAlHub(light, "1");
+                SendDataToHub(light, "1");
             }
 
             handler = !handler;
         }
 
-        private async void EnviarInformaciónAlHub(string light, string handler)
+        private async void SendDataToHub(string light, string handler)
         {
             var telemetryDataPoint = new
             {

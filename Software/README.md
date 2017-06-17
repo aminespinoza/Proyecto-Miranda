@@ -59,4 +59,70 @@ Hasta aquí es todo lo que la aplicación de WPF hace por el momento. Considera 
 
 El segundo proyecto dentro de esta solución es una Aplicación Universal de Windows y es simplemente un conjunto de doce botones que corresponden a cada una de las luces presentadas.
 
-<img src="Assets/UWPInterface.jpg"/>
+<img src="Assets/UWPInterface.jpg" width="300" height="410"/>
+
+Cada botón ejecuta el mismo método solo que obviamente con cada una de sus variables.
+```c
+private void btnTaller_Click(object sender, RoutedEventArgs e)
+{
+	HandleLightStatus("10", ref luzTallerPrendida);
+}
+```
+Este método llamado **HandleLightStatus** solo fue creado para ser un punto medio antes de subir información a la nube. El método que sube información al IoT Hub es de tipo asíncrono y por la naturaleza del mismo no es posible usar parámetros con referencia de valores y esto es sumamente útil para mantener el estado de cada luz dentro de la aplicación así que crear dos métodos fue la mejor solución, además, así cumplimos la premisa de que cada método debe llevar una sola función.
+```c
+private void HandleLightStatus(string light, ref bool handler)
+{
+	if (handler)
+	{
+		SendDataToHub(light, "0");
+	}
+	else
+	{
+		SendDataToHub(light, "1");
+	}
+
+	handler = !handler;
+}
+```
+El método **SendDataToHub** recibe los parámetros esperados para crear una cadena con formato JSON que será la que se envíe al IoT Hub, solo para validar que todo va en orden, la misma cadena se imprime en la terminal de salida de Visual Studio.
+```c
+private async void SendDataToHub(string light, string handler)
+{
+	var telemetryDataPoint = new
+	{
+		lightNumber = light,
+		lightStatus = handler,
+		date = DateTime.Now
+	};
+
+	var messageString = JsonConvert.SerializeObject(telemetryDataPoint);
+	var message = new Message(Encoding.ASCII.GetBytes(messageString));
+
+	Debug.WriteLine(messageString);
+	await deviceClient.SendEventAsync(message);
+}
+```
+## Las pruebas
+
+La primera prueba que debes ver aquí es comprobar que en la terminal de salida de Visual Studio se imprime un texto en formato JSON como el siguiente.
+```c
+{"lightNumber":"10","lightStatus":"1","date":"2017-06-17T04:25:15.1160018-05:00"}
+```
+<img src="Assets/json.jpg" width="748" height="410"/>
+
+La segunda prueba es que usando el [Device Explorer](https://github.com/Azure/azure-iot-sdk-csharp/tree/master/tools/DeviceExplorer) para IoT Hub puedas ver que si estás enviando la información a la nube, obviamente esta prueba la podrás hacer únicamente después de la configuración de toda tu infraestructura en la última seccion.
+
+Con respecto a la aplicación de WPF, puedes escribir en el método **HandleLights** por un momento un poco de código **hardcoded** que pueda funcionar de la siguiente manera.
+```c
+private void HandleLights(string light, string status)
+{
+	string finalCommand = "01,1";
+
+	puertoSerial.Open();
+	puertoSerial.Write(finalCommand);
+	puertoSerial.Close();
+}
+```
+Hacer esto te hará comprobar que la comunicación entre WPF y Arduino está sucediendo de la manera esperada y que podrás avanzar sin problemas hasta aquí. 
+
+También, en la aplicación WPF debes asignar el puerto COM, este puerto lo puedes obtener desde la aplicación de Arduino (te aparece en la configuración del puerto), también asegúrate de que no tengas abierto el monitor serial de Arduino pues toma control del puerto y solo puede haber un enlace, ya sea la aplicación WPF o el monitor serial de Arduino, así que no tengas nada abierto que utilice este puerto para evitar errores.
