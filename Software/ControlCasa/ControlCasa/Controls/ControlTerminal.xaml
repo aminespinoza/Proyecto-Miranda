@@ -1,0 +1,19 @@
+﻿<UserControl x:Class="ControlCasa.Controls.ControlTerminal"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:ControlCasa.Controls" xmlns:gif="http://wpfanimatedgif.codeplex.com"
+             mc:Ignorable="d" Visibility="Collapsed"
+             Height="310" Width="400">
+    <Border BorderBrush="#FF188DB0" BorderThickness="1" Margin="0" Background="#F21C415B">
+        <Grid Margin="0">
+            <TextBlock x:Name="txtClose" HorizontalAlignment="Right" Margin="0,5,5,0" TextWrapping="Wrap" Text="X" VerticalAlignment="Top" Foreground="#FF188DB0" FontWeight="Bold" FontSize="16"/>
+            <Rectangle x:Name="rectClose" Fill="#191C415B" HorizontalAlignment="Right" Height="20" Margin="0,5,5,0" VerticalAlignment="Top" Width="20" MouseLeftButtonUp="rectClose_MouseLeftButtonUp"/>
+            <Grid HorizontalAlignment="Left" Height="266" Margin="10,31,0,0" VerticalAlignment="Top" Width="378">
+                <Image gif:ImageBehavior.AnimatedSource="/ControlCasa;component/Assets/animations/cli2.gif"/>
+            </Grid>
+            <TextBlock x:Name="txtClose_Copy" HorizontalAlignment="Left" Margin="10,5,5,0" TextWrapping="Wrap" Text="Terminal" VerticalAlignment="Top" Foreground="#FF188DB0" FontSize="18" FontFamily="Consolas"/>
+        </Grid>
+    </Border>
+</UserControl>
