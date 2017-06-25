@@ -6,20 +6,239 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     mc:Ignorable="d">
+    <Page.Resources>
+        <Storyboard x:Name="displayUp">
+            <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.RenderTransform).(CompositeTransform.ScaleX)" Storyboard.TargetName="contPrincipal">
+                <EasingDoubleKeyFrame KeyTime="0" Value="1"/>
+                <EasingDoubleKeyFrame KeyTime="0:0:0.5" Value="0.7">
+                    <EasingDoubleKeyFrame.EasingFunction>
+                        <CircleEase EasingMode="EaseOut"/>
+                    </EasingDoubleKeyFrame.EasingFunction>
+                </EasingDoubleKeyFrame>
+            </DoubleAnimationUsingKeyFrames>
+            <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.RenderTransform).(CompositeTransform.ScaleY)" Storyboard.TargetName="contPrincipal">
+                <EasingDoubleKeyFrame KeyTime="0" Value="1"/>
+                <EasingDoubleKeyFrame KeyTime="0:0:0.5" Value="0.7">
+                    <EasingDoubleKeyFrame.EasingFunction>
+                        <CircleEase EasingMode="EaseOut"/>
+                    </EasingDoubleKeyFrame.EasingFunction>
+                </EasingDoubleKeyFrame>
+            </DoubleAnimationUsingKeyFrames>
+            <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.Opacity)" Storyboard.TargetName="contPrincipal">
+                <EasingDoubleKeyFrame KeyTime="0" Value="1"/>
+                <EasingDoubleKeyFrame KeyTime="0:0:0.5" Value="0">
+                    <EasingDoubleKeyFrame.EasingFunction>
+                        <CircleEase EasingMode="EaseOut"/>
+                    </EasingDoubleKeyFrame.EasingFunction>
+                </EasingDoubleKeyFrame>
+            </DoubleAnimationUsingKeyFrames>
+            <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.RenderTransform).(CompositeTransform.TranslateX)" Storyboard.TargetName="contArriba">
+                <EasingDoubleKeyFrame KeyTime="0:0:0.4" Value="400"/>
+                <EasingDoubleKeyFrame KeyTime="0:0:1" Value="0">
+                    <EasingDoubleKeyFrame.EasingFunction>
+                        <CubicEase EasingMode="EaseOut"/>
+                    </EasingDoubleKeyFrame.EasingFunction>
+                </EasingDoubleKeyFrame>
+            </DoubleAnimationUsingKeyFrames>
+            <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.Visibility)" Storyboard.TargetName="contPrincipal">
+                <DiscreteObjectKeyFrame KeyTime="0:0:0.5">
+                    <DiscreteObjectKeyFrame.Value>
+                        <Visibility>Visible</Visibility>
+                    </DiscreteObjectKeyFrame.Value>
+                </DiscreteObjectKeyFrame>
+                <DiscreteObjectKeyFrame KeyTime="0:0:0.6">
+                    <DiscreteObjectKeyFrame.Value>
+                        <Visibility>Collapsed</Visibility>
+                    </DiscreteObjectKeyFrame.Value>
+                </DiscreteObjectKeyFrame>
+            </ObjectAnimationUsingKeyFrames>
+        </Storyboard>
+        <Storyboard x:Name="displayDown">
+            <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.RenderTransform).(CompositeTransform.ScaleX)" Storyboard.TargetName="contPrincipal">
+                <EasingDoubleKeyFrame KeyTime="0" Value="1"/>
+                <EasingDoubleKeyFrame KeyTime="0:0:0.5" Value="0.7">
+                    <EasingDoubleKeyFrame.EasingFunction>
+                        <CircleEase EasingMode="EaseOut"/>
+                    </EasingDoubleKeyFrame.EasingFunction>
+                </EasingDoubleKeyFrame>
+            </DoubleAnimationUsingKeyFrames>
+            <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.RenderTransform).(CompositeTransform.ScaleY)" Storyboard.TargetName="contPrincipal">
+                <EasingDoubleKeyFrame KeyTime="0" Value="1"/>
+                <EasingDoubleKeyFrame KeyTime="0:0:0.5" Value="0.7">
+                    <EasingDoubleKeyFrame.EasingFunction>
+                        <CircleEase EasingMode="EaseOut"/>
+                    </EasingDoubleKeyFrame.EasingFunction>
+                </EasingDoubleKeyFrame>
+            </DoubleAnimationUsingKeyFrames>
+            <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.Opacity)" Storyboard.TargetName="contPrincipal">
+                <EasingDoubleKeyFrame KeyTime="0" Value="1"/>
+                <EasingDoubleKeyFrame KeyTime="0:0:0.5" Value="0">
+                    <EasingDoubleKeyFrame.EasingFunction>
+                        <CircleEase EasingMode="EaseOut"/>
+                    </EasingDoubleKeyFrame.EasingFunction>
+                </EasingDoubleKeyFrame>
+            </DoubleAnimationUsingKeyFrames>
+            <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.RenderTransform).(CompositeTransform.TranslateX)" Storyboard.TargetName="contAbajo">
+                <EasingDoubleKeyFrame KeyTime="0:0:0.4" Value="-400"/>
+                <EasingDoubleKeyFrame KeyTime="0:0:1" Value="0">
+                    <EasingDoubleKeyFrame.EasingFunction>
+                        <CubicEase EasingMode="EaseOut"/>
+                    </EasingDoubleKeyFrame.EasingFunction>
+                </EasingDoubleKeyFrame>
+            </DoubleAnimationUsingKeyFrames>
+            <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.Visibility)" Storyboard.TargetName="contPrincipal">
+                <DiscreteObjectKeyFrame KeyTime="0:0:0.5">
+                    <DiscreteObjectKeyFrame.Value>
+                        <Visibility>Visible</Visibility>
+                    </DiscreteObjectKeyFrame.Value>
+                </DiscreteObjectKeyFrame>
+                <DiscreteObjectKeyFrame KeyTime="0:0:0.6">
+                    <DiscreteObjectKeyFrame.Value>
+                        <Visibility>Collapsed</Visibility>
+                    </DiscreteObjectKeyFrame.Value>
+                </DiscreteObjectKeyFrame>
+            </ObjectAnimationUsingKeyFrames>
+        </Storyboard>
+        <Storyboard x:Name="hideUp">
+            <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.RenderTransform).(CompositeTransform.ScaleX)" Storyboard.TargetName="contPrincipal">
+                <EasingDoubleKeyFrame KeyTime="0:0:0.5" Value="0.7"/>
+                <EasingDoubleKeyFrame KeyTime="0:0:1" Value="1">
+                    <EasingDoubleKeyFrame.EasingFunction>
+                        <CircleEase EasingMode="EaseOut"/>
+                    </EasingDoubleKeyFrame.EasingFunction>
+                </EasingDoubleKeyFrame>
+            </DoubleAnimationUsingKeyFrames>
+            <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.RenderTransform).(CompositeTransform.ScaleY)" Storyboard.TargetName="contPrincipal">
+                <EasingDoubleKeyFrame KeyTime="0:0:0.5" Value="0.7"/>
+                <EasingDoubleKeyFrame KeyTime="0:0:1" Value="1">
+                    <EasingDoubleKeyFrame.EasingFunction>
+                        <CircleEase EasingMode="EaseOut"/>
+                    </EasingDoubleKeyFrame.EasingFunction>
+                </EasingDoubleKeyFrame>
+            </DoubleAnimationUsingKeyFrames>
+            <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.Opacity)" Storyboard.TargetName="contPrincipal">
+                <EasingDoubleKeyFrame KeyTime="0:0:0.5" Value="0"/>
+                <EasingDoubleKeyFrame KeyTime="0:0:1" Value="1">
+                    <EasingDoubleKeyFrame.EasingFunction>
+                        <CircleEase EasingMode="EaseOut"/>
+                    </EasingDoubleKeyFrame.EasingFunction>
+                </EasingDoubleKeyFrame>
+            </DoubleAnimationUsingKeyFrames>
+            <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.RenderTransform).(CompositeTransform.TranslateX)" Storyboard.TargetName="contArriba">
+                <EasingDoubleKeyFrame KeyTime="0" Value="0">
+                    <EasingDoubleKeyFrame.EasingFunction>
+                        <CubicEase EasingMode="EaseOut"/>
+                    </EasingDoubleKeyFrame.EasingFunction>
+                </EasingDoubleKeyFrame>
+                <EasingDoubleKeyFrame KeyTime="0:0:0.5" Value="400"/>
+            </DoubleAnimationUsingKeyFrames>
+            <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.Visibility)" Storyboard.TargetName="contPrincipal">
+                <DiscreteObjectKeyFrame KeyTime="0">
+                    <DiscreteObjectKeyFrame.Value>
+                        <Visibility>Collapsed</Visibility>
+                    </DiscreteObjectKeyFrame.Value>
+                </DiscreteObjectKeyFrame>
+                <DiscreteObjectKeyFrame KeyTime="0:0:0.4">
+                    <DiscreteObjectKeyFrame.Value>
+                        <Visibility>Collapsed</Visibility>
+                    </DiscreteObjectKeyFrame.Value>
+                </DiscreteObjectKeyFrame>
+                <DiscreteObjectKeyFrame KeyTime="0:0:0.5">
+                    <DiscreteObjectKeyFrame.Value>
+                        <Visibility>Visible</Visibility>
+                    </DiscreteObjectKeyFrame.Value>
+                </DiscreteObjectKeyFrame>
+                <DiscreteObjectKeyFrame KeyTime="0:0:1">
+                    <DiscreteObjectKeyFrame.Value>
+                        <Visibility>Visible</Visibility>
+                    </DiscreteObjectKeyFrame.Value>
+                </DiscreteObjectKeyFrame>
+            </ObjectAnimationUsingKeyFrames>
+        </Storyboard>
+        <Storyboard x:Name="hideDown">
+            <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.RenderTransform).(CompositeTransform.ScaleX)" Storyboard.TargetName="contPrincipal">
+                <EasingDoubleKeyFrame KeyTime="0:0:0.5" Value="0.7">
+                    <EasingDoubleKeyFrame.EasingFunction>
+                        <CircleEase EasingMode="EaseOut"/>
+                    </EasingDoubleKeyFrame.EasingFunction>
+                </EasingDoubleKeyFrame>
+                <EasingDoubleKeyFrame KeyTime="0:0:1" Value="1"/>
+            </DoubleAnimationUsingKeyFrames>
+            <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.RenderTransform).(CompositeTransform.ScaleY)" Storyboard.TargetName="contPrincipal">
+                <EasingDoubleKeyFrame KeyTime="0:0:0.5" Value="0.7">
+                    <EasingDoubleKeyFrame.EasingFunction>
+                        <CircleEase EasingMode="EaseOut"/>
+                    </EasingDoubleKeyFrame.EasingFunction>
+                </EasingDoubleKeyFrame>
+                <EasingDoubleKeyFrame KeyTime="0:0:1" Value="1"/>
+            </DoubleAnimationUsingKeyFrames>
+            <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.Opacity)" Storyboard.TargetName="contPrincipal">
+                <EasingDoubleKeyFrame KeyTime="0:0:0.5" Value="0">
+                    <EasingDoubleKeyFrame.EasingFunction>
+                        <CircleEase EasingMode="EaseOut"/>
+                    </EasingDoubleKeyFrame.EasingFunction>
+                </EasingDoubleKeyFrame>
+                <EasingDoubleKeyFrame KeyTime="0:0:1" Value="1"/>
+            </DoubleAnimationUsingKeyFrames>
+            <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.RenderTransform).(CompositeTransform.TranslateX)" Storyboard.TargetName="contAbajo">
+                <EasingDoubleKeyFrame KeyTime="0" Value="0">
+                    <EasingDoubleKeyFrame.EasingFunction>
+                        <CubicEase EasingMode="EaseOut"/>
+                    </EasingDoubleKeyFrame.EasingFunction>
+                </EasingDoubleKeyFrame>
+                <EasingDoubleKeyFrame KeyTime="0:0:0.5" Value="-400"/>
+            </DoubleAnimationUsingKeyFrames>
+            <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.Visibility)" Storyboard.TargetName="contPrincipal">
+                <DiscreteObjectKeyFrame KeyTime="0:0:0.4">
+                    <DiscreteObjectKeyFrame.Value>
+                        <Visibility>Collapsed</Visibility>
+                    </DiscreteObjectKeyFrame.Value>
+                </DiscreteObjectKeyFrame>
+                <DiscreteObjectKeyFrame KeyTime="0:0:0.5">
+                    <DiscreteObjectKeyFrame.Value>
+                        <Visibility>Visible</Visibility>
+                    </DiscreteObjectKeyFrame.Value>
+                </DiscreteObjectKeyFrame>
+            </ObjectAnimationUsingKeyFrames>
+        </Storyboard>
+    </Page.Resources>
 
-    <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
-        <Button x:Name="btnPolli" Content="Polli" HorizontalAlignment="Stretch" Height="40" Margin="10,10,10,0" VerticalAlignment="Top" d:LayoutOverrides="LeftPosition, RightPosition" Click="btnPolli_Click"/>
-        <Button x:Name="btnOscar" Content="Oscar" HorizontalAlignment="Stretch" Height="40" Margin="10,55,10,0" VerticalAlignment="Top" d:LayoutOverrides="LeftPosition, RightPosition" Click="btnOscar_Click"/>
-        <Button x:Name="btnTaller" Content="Taller" HorizontalAlignment="Stretch" Height="40" Margin="10,100,10,0" VerticalAlignment="Top" d:LayoutOverrides="LeftPosition, RightPosition" Click="btnTaller_Click"/>
-        <Button x:Name="btnBanoAbajoInt" Content="Baño Abajo Interior" HorizontalAlignment="Stretch" Height="40" Margin="10,145,10,0" VerticalAlignment="Top" d:LayoutOverrides="LeftPosition, RightPosition" Click="btnBanoAbajoInt_Click"/>
-        <Button x:Name="btnBanoAbajoExt" Content="Baño Abajo Exterior" HorizontalAlignment="Stretch" Height="40" Margin="10,190,10,0" VerticalAlignment="Top" d:LayoutOverrides="LeftPosition, RightPosition" Click="btnBanoAbajoExt_Click"/>
-        <Button x:Name="btnSala" Content="Sala" HorizontalAlignment="Stretch" Height="40" Margin="10,280,10,0" VerticalAlignment="Top" d:LayoutOverrides="LeftPosition, RightPosition" Click="btnSala_Click"/>
-        <Button x:Name="btnCocina" Content="Cocina" HorizontalAlignment="Stretch" Height="40" Margin="10,235,10,0" VerticalAlignment="Top" d:LayoutOverrides="LeftPosition, RightPosition" Click="btnCocina_Click"/>
-        <Button x:Name="btnPatio" Content="Patio" HorizontalAlignment="Stretch" Height="40" Margin="10,325,10,0" VerticalAlignment="Top" d:LayoutOverrides="LeftPosition, RightPosition" Click="btnPatio_Click"/>
-        <Button x:Name="btnBanoArribaInt" Content="Baño Arriba Interior" HorizontalAlignment="Stretch" Height="40" Margin="10,370,10,0" VerticalAlignment="Top" d:LayoutOverrides="LeftPosition, RightPosition" Click="btnBanoArribaInt_Click"/>
-        <Button x:Name="btnBanoArribaExt" Content="Baño Arriba Exterior" HorizontalAlignment="Stretch" Height="40" Margin="10,415,10,0" VerticalAlignment="Top" d:LayoutOverrides="LeftPosition, RightPosition" Click="btnBanoArribaExt_Click"/>
-        <Button x:Name="btnCuartoCosas" Content="Cuarto cosas" HorizontalAlignment="Stretch" Height="40" Margin="10,460,10,0" VerticalAlignment="Top" d:LayoutOverrides="LeftPosition, RightPosition" Click="btnCuartoCosas_Click"/>
-        <Button x:Name="btnVentilador" Content="Ventilador" HorizontalAlignment="Stretch" Height="40" Margin="10,505,10,0" VerticalAlignment="Top" d:LayoutOverrides="LeftPosition, RightPosition" Click="btnVentilador_Click"/>
+    <Grid>
+        <Grid.Background>
+            <ImageBrush Stretch="Fill" ImageSource="Assets/Images/Black_metal.jpg"/>
+        </Grid.Background>
+        <Image HorizontalAlignment="Center" Height="256" Margin="0,-30,0,0" VerticalAlignment="Top" Width="256" Source="Assets/Images/Logo_dedsec_white.png"/>
+        <StackPanel x:Name="contPrincipal" HorizontalAlignment="Center" Margin="10,210,10,0" VerticalAlignment="Top" RenderTransformOrigin="0.5,0.5">
+            <StackPanel.RenderTransform>
+                <CompositeTransform/>
+            </StackPanel.RenderTransform>
+            <Button x:Name="btnArriba" Content="Planta alta" HorizontalAlignment="Stretch" Height="45" VerticalAlignment="Top" Click="btnArriba_Click" Style="{StaticResource ButtonStyle1}" Foreground="#FF188DB0" FontFamily="Consolas" FontSize="22" BorderBrush="#FF188DB0" Width="340" Margin="0,10,0,0"/>
+            <Button x:Name="btnAbajo" Content="Planta baja" HorizontalAlignment="Stretch" Height="45" VerticalAlignment="Top" Click="btnAbajo_Click" Style="{StaticResource ButtonStyle1}" Foreground="#FF188DB0" FontFamily="Consolas" FontSize="22" BorderBrush="#FF188DB0" Width="340" Margin="0,10,0,0"/>
+            <Button x:Name="btnAlarma" Content="Alarma" HorizontalAlignment="Stretch" Height="45" VerticalAlignment="Top" Click="btnAlarma_Click" Style="{StaticResource ButtonStyle1}" Foreground="#FF188DB0" FontFamily="Consolas" FontSize="22" BorderBrush="#FF188DB0" Width="340" Margin="0,10,0,0"/>
+        </StackPanel>
+        <StackPanel x:Name="contAbajo" HorizontalAlignment="Center" Margin="10,210,10,0" VerticalAlignment="Top" RenderTransformOrigin="0.5,0.5">
+            <StackPanel.RenderTransform>
+                <CompositeTransform TranslateX="-400"/>
+            </StackPanel.RenderTransform>
+            <Button x:Name="btnPolli" Content="Polli" HorizontalAlignment="Stretch" Height="45" VerticalAlignment="Top" Click="btnPolli_Click" Style="{StaticResource ButtonStyle1}" Foreground="#FF188DB0" FontFamily="Consolas" FontSize="22" BorderBrush="#FF188DB0" Width="340" Margin="0,10,0,0"/>
+            <Button x:Name="btnTaller" Content="Taller" HorizontalAlignment="Stretch" Height="45" VerticalAlignment="Top" Click="btnTaller_Click" Style="{StaticResource ButtonStyle1}" Foreground="#FF188DB0" FontFamily="Consolas" FontSize="22" BorderBrush="#FF188DB0" Width="340" Margin="0,10,0,0"/>
+            <Button x:Name="btnBanoAbajoInt" Content="Baño abajo interior" HorizontalAlignment="Stretch" Height="45" VerticalAlignment="Top" Click="btnBanoAbajoInt_Click" Style="{StaticResource ButtonStyle1}" Foreground="#FF188DB0" FontFamily="Consolas" FontSize="22" BorderBrush="#FF188DB0" Width="340" Margin="0,10,0,0"/>
+            <Button x:Name="btnBanoAbajoExt" Content="Baño abajo exterior" HorizontalAlignment="Stretch" Height="45" VerticalAlignment="Top" Style="{StaticResource ButtonStyle1}" Foreground="#FF188DB0" FontFamily="Consolas" FontSize="22" BorderBrush="#FF188DB0" Width="340" Margin="0,10,0,0" Click="btnBanoArribaExt_Click"/>
+            <Button x:Name="btnSala" Content="Sala" HorizontalAlignment="Stretch" Height="45" VerticalAlignment="Top" Click="btnSala_Click" Style="{StaticResource ButtonStyle1}" Foreground="#FF188DB0" FontFamily="Consolas" FontSize="22" BorderBrush="#FF188DB0" Width="340" Margin="0,10,0,0"/>
+            <Button x:Name="btnPatio" Content="Patio" HorizontalAlignment="Stretch" Height="45" VerticalAlignment="Top" Click="btnPatio_Click" Style="{StaticResource ButtonStyle1}" Foreground="#FF188DB0" FontFamily="Consolas" FontSize="22" BorderBrush="#FF188DB0" Width="340" Margin="0,10,0,0"/>
+        </StackPanel>
+        <StackPanel x:Name="contArriba" HorizontalAlignment="Center" Margin="10,210,10,0" VerticalAlignment="Top" RenderTransformOrigin="0.5,0.5">
+            <StackPanel.RenderTransform>
+                <CompositeTransform TranslateX="400"/>
+            </StackPanel.RenderTransform>
+            <Button x:Name="btnOscar" Content="Oscar" HorizontalAlignment="Stretch" Height="45" VerticalAlignment="Top" Click="btnOscar_Click" Style="{StaticResource ButtonStyle1}" Foreground="#FF188DB0" FontFamily="Consolas" FontSize="22" BorderBrush="#FF188DB0" Width="340" Margin="0,10,0,0"/>
+            <Button x:Name="btnBanoArribaInt" Content="Baño arriba interior" HorizontalAlignment="Stretch" Height="45" VerticalAlignment="Top" Click="btnBanoArribaInt_Click" Style="{StaticResource ButtonStyle1}" Foreground="#FF188DB0" FontFamily="Consolas" FontSize="22" BorderBrush="#FF188DB0" Width="340" Margin="0,10,0,0"/>
+            <Button x:Name="btnBañoArribaExt" Content="Baño arriba exterior" HorizontalAlignment="Stretch" Height="45" VerticalAlignment="Top" Click="btnBanoArribaExt_Click" Style="{StaticResource ButtonStyle1}" Foreground="#FF188DB0" FontFamily="Consolas" FontSize="22" BorderBrush="#FF188DB0" Width="340" Margin="0,10,0,0"/>
+            <Button x:Name="btnCuartoCosas" Content="Cuarto cosas" HorizontalAlignment="Stretch" Height="45" VerticalAlignment="Top" Click="btnCuartoCosas_Click" Style="{StaticResource ButtonStyle1}" Foreground="#FF188DB0" FontFamily="Consolas" FontSize="22" BorderBrush="#FF188DB0" Width="340" Margin="0,10,0,0"/>
+            <Button x:Name="btnVentilador" Content="Ventilador" HorizontalAlignment="Stretch" Height="45" VerticalAlignment="Top" Click="btnVentilador_Click" Style="{StaticResource ButtonStyle1}" Foreground="#FF188DB0" FontFamily="Consolas" FontSize="22" BorderBrush="#FF188DB0" Width="340" Margin="0,10,0,0"/>
+            <Button x:Name="btnCocina" Content="Cocina" HorizontalAlignment="Stretch" Height="45" VerticalAlignment="Top" Click="btnCocina_Click" Style="{StaticResource ButtonStyle1}" Foreground="#FF188DB0" FontFamily="Consolas" FontSize="22" BorderBrush="#FF188DB0" Width="340" Margin="0,10,0,0"/>
+        </StackPanel>
+
 
     </Grid>
 </Page>

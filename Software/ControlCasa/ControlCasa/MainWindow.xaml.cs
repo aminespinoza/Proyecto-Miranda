@@ -14,7 +14,7 @@ namespace ControlCasa
     public partial class MainWindow : Window
     {
         static ServiceClient serviceClient;
-        static string connectionString = "Tu cadena de conexión";
+        static string connectionString = "tu cadena de conexion";
         static string iotHubD2cEndpoint = "messages/events";
         static EventHubClient eventHubClient;
         EventHubReceiver eventHubReceiver;
