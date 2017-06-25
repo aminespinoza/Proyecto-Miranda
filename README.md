@@ -10,6 +10,8 @@ Si quieres conocer un poco más acerca de este proyecto, te invito a leer el art
 
 ## Actualizaciones al proyecto
 
+##Commit 8
+
 A partir del [Commit 8](https://github.com/aminespinoza/Proyecto-Miranda/commit/74567a1d7eaab58b1d0450f33ab600b73b789dfc) de este proyecto comenzaré a agregar nueva funcionalidad en las aplicaciones, no tengo idea de que podré ir agregando pero veremos que va saliendo.
 
 En este [Commit 8](https://github.com/aminespinoza/Proyecto-Miranda/commit/74567a1d7eaab58b1d0450f33ab600b73b789dfc) agregué lo siguiente:  
@@ -24,5 +26,7 @@ En este proyecto hay un gran problema de rendimiento en la memoria RAM, la bibli
 <img src="Assets/Rendimiento.jpg" width="311" height="625"/>
 
 Pensaba poner muchas imágenes y ventanas de este tipo pero este gran problema me detuvo. Hasta no encontrar otra opción o ver como optimizar las cosas solo habrá dos ventanas.
+
+##Commit 9
 
 @aminespinoza

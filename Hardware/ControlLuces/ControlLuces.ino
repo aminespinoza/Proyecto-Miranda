@@ -115,6 +115,8 @@ void handleLightFromValue(char lightPosition, char lightSecondPosition, char lig
     case 12:
       ShowSpecificColor(lightValue, redLedLightTwelve, greenLedLightTwelve, relayTwelve);
       break;
+    case 13:
+      TriggerAlarm();
     default:
     break;
   }
@@ -135,3 +137,37 @@ void ShowSpecificColor(int lightStatus, int redLight, int greenLight, int relayN
     digitalWrite(greenLight, HIGH);
   }
 }
+
+void TriggerAlarm()
+{
+  for(int i = 0; i < 5; i++ )
+  {
+    digitalWrite(relayOne, HIGH);
+    digitalWrite(relayTwo, HIGH);
+    digitalWrite(relayThree, HIGH);
+    digitalWrite(relayFour, HIGH);
+    digitalWrite(relayFive, HIGH);
+    digitalWrite(relaySix, HIGH);
+    digitalWrite(relaySeven, HIGH);
+    digitalWrite(relayEight, HIGH);
+    digitalWrite(relayNine, HIGH);
+    digitalWrite(relayTen, HIGH);
+    digitalWrite(relayEleven, HIGH);
+    digitalWrite(relayTwelve, HIGH);
+    delay(1000);
+    digitalWrite(relayOne, LOW);
+    digitalWrite(relayTwo, LOW);
+    digitalWrite(relayThree, LOW);
+    digitalWrite(relayFour, LOW);
+    digitalWrite(relayFive, LOW);
+    digitalWrite(relaySix, LOW);
+    digitalWrite(relaySeven, LOW);
+    digitalWrite(relayEight, LOW);
+    digitalWrite(relayNine, LOW);
+    digitalWrite(relayTen, LOW);
+    digitalWrite(relayEleven, LOW);
+    digitalWrite(relayTwelve, LOW);
+    delay(1000);
+  }
+}
+
