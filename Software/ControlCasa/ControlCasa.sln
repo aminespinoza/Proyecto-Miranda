@@ -1,11 +1,13 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
-VisualStudioVersion = 15.0.26228.10
+VisualStudioVersion = 15.0.27004.2005
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ControlCasa", "ControlCasa\ControlCasa.csproj", "{1B934A50-38E2-4CAF-831C-02FC111225D8}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CienteUniversal", "CienteUniversal\CienteUniversal.csproj", "{005F77CB-3A2D-4001-9CC2-01085995E189}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BotCasa", "BotCasa\BotCasa.csproj", "{6F40C3CD-6030-4F5A-A106-C99F2E008E9B}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -55,8 +57,27 @@ Global
 		{005F77CB-3A2D-4001-9CC2-01085995E189}.Release|x86.ActiveCfg = Release|x86
 		{005F77CB-3A2D-4001-9CC2-01085995E189}.Release|x86.Build.0 = Release|x86
 		{005F77CB-3A2D-4001-9CC2-01085995E189}.Release|x86.Deploy.0 = Release|x86
+		{6F40C3CD-6030-4F5A-A106-C99F2E008E9B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6F40C3CD-6030-4F5A-A106-C99F2E008E9B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6F40C3CD-6030-4F5A-A106-C99F2E008E9B}.Debug|ARM.ActiveCfg = Debug|Any CPU
+		{6F40C3CD-6030-4F5A-A106-C99F2E008E9B}.Debug|ARM.Build.0 = Debug|Any CPU
+		{6F40C3CD-6030-4F5A-A106-C99F2E008E9B}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{6F40C3CD-6030-4F5A-A106-C99F2E008E9B}.Debug|x64.Build.0 = Debug|Any CPU
+		{6F40C3CD-6030-4F5A-A106-C99F2E008E9B}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{6F40C3CD-6030-4F5A-A106-C99F2E008E9B}.Debug|x86.Build.0 = Debug|Any CPU
+		{6F40C3CD-6030-4F5A-A106-C99F2E008E9B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6F40C3CD-6030-4F5A-A106-C99F2E008E9B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{6F40C3CD-6030-4F5A-A106-C99F2E008E9B}.Release|ARM.ActiveCfg = Release|Any CPU
+		{6F40C3CD-6030-4F5A-A106-C99F2E008E9B}.Release|ARM.Build.0 = Release|Any CPU
+		{6F40C3CD-6030-4F5A-A106-C99F2E008E9B}.Release|x64.ActiveCfg = Release|Any CPU
+		{6F40C3CD-6030-4F5A-A106-C99F2E008E9B}.Release|x64.Build.0 = Release|Any CPU
+		{6F40C3CD-6030-4F5A-A106-C99F2E008E9B}.Release|x86.ActiveCfg = Release|Any CPU
+		{6F40C3CD-6030-4F5A-A106-C99F2E008E9B}.Release|x86.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {059FAD08-9E23-4455-A87A-C5F5AC872252}
 	EndGlobalSection
 EndGlobal

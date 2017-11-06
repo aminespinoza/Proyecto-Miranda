@@ -36,13 +36,19 @@ namespace ControlCasa.Controls
         private void btnDedsec_Click(object sender, RoutedEventArgs e)
         {
             TriggerAnimation("hideSecurityMenu");
-            master.ctrlDedsec.Visibility = Visibility.Visible;
+            //master.ctrlDedsec.Visibility = Visibility.Visible;
         }
 
         private void btnTerminal_Click(object sender, RoutedEventArgs e)
         {
             TriggerAnimation("hideSecurityMenu");
-            master.ctrlTerminal.Visibility = Visibility.Visible;
+            //master.ctrlTerminal.Visibility = Visibility.Visible;
+        }
+
+        private void btnAlarma_Click(object sender, RoutedEventArgs e)
+        {
+            TriggerAnimation("hideSecurityMenu");
+            master.ctrlAlarm.Visibility = Visibility.Visible;
         }
 
         private void TriggerAnimation(string animationName)
@@ -50,5 +56,7 @@ namespace ControlCasa.Controls
             Storyboard standardAnimation = (Storyboard)FindResource(animationName);
             standardAnimation.Begin();
         }
+
+        
     }
 }

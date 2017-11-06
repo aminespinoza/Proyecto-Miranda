@@ -1,0 +1,129 @@
+﻿<UserControl x:Class="ControlCasa.Controls.Alarm"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:local="clr-namespace:ControlCasa.Controls" xmlns:gif="http://wpfanimatedgif.codeplex.com"
+             mc:Ignorable="d"
+             Height="350" Width="472">
+    <Border BorderBrush="#FF188DB0" BorderThickness="1" Margin="0" Background="#F21C415B">
+        <Grid Margin="0">
+            <TextBlock x:Name="txtClose" HorizontalAlignment="Right" Margin="0,5,5,0" TextWrapping="Wrap" Text="X" VerticalAlignment="Top" Foreground="#FF188DB0" FontWeight="Bold" FontSize="16" Grid.Column="1" Height="21.28" Width="10.483"/>
+            <Rectangle x:Name="rectClose" Fill="#191C415B" HorizontalAlignment="Right" Height="20" Margin="0,6.28,5,0" VerticalAlignment="Top" Width="20" MouseLeftButtonUp="rectClose_MouseLeftButtonUp" Grid.Column="1"/>
+            <Grid HorizontalAlignment="Left" Margin="10,31,0,10" Width="450.329" Grid.ColumnSpan="2">
+                <TextBlock HorizontalAlignment="Left" Height="18" Margin="10,10,0,0" TextWrapping="Wrap" Text="Hora fijada:" VerticalAlignment="Top" Foreground="#FF188DB0" FontSize="14" FontFamily="Consolas"/>
+                <ComboBox x:Name="cmbTimeHour" HorizontalAlignment="Left" Height="20" Margin="155,10,0,0" VerticalAlignment="Top" Width="50">
+                    <ComboBoxItem Content="00"/>
+                    <ComboBoxItem Content="01"/>
+                    <ComboBoxItem Content="02"/>
+                    <ComboBoxItem Content="03"/>
+                    <ComboBoxItem Content="04"/>
+                    <ComboBoxItem Content="05"/>
+                    <ComboBoxItem Content="06"/>
+                    <ComboBoxItem Content="07"/>
+                    <ComboBoxItem Content="08"/>
+                    <ComboBoxItem Content="09"/>
+                    <ComboBoxItem Content="10"/>
+                    <ComboBoxItem Content="11"/>
+                    <ComboBoxItem Content="12"/>
+                    <ComboBoxItem Content="13"/>
+                    <ComboBoxItem Content="14"/>
+                    <ComboBoxItem Content="15"/>
+                    <ComboBoxItem Content="16"/>
+                    <ComboBoxItem Content="17"/>
+                    <ComboBoxItem Content="18"/>
+                    <ComboBoxItem Content="19"/>
+                    <ComboBoxItem Content="20"/>
+                    <ComboBoxItem Content="21"/>
+                    <ComboBoxItem Content="22"/>
+                    <ComboBoxItem Content="23"/>
+                </ComboBox>
+                <ComboBox x:Name="cmbTimeMin" HorizontalAlignment="Left" Height="20" Margin="225,10,0,0" VerticalAlignment="Top" Width="50">
+                    <ComboBoxItem Content="00"/>
+                    <ComboBoxItem Content="01"/>
+                    <ComboBoxItem Content="02"/>
+                    <ComboBoxItem Content="03"/>
+                    <ComboBoxItem Content="04"/>
+                    <ComboBoxItem Content="05"/>
+                    <ComboBoxItem Content="06"/>
+                    <ComboBoxItem Content="07"/>
+                    <ComboBoxItem Content="08"/>
+                    <ComboBoxItem Content="09"/>
+                    <ComboBoxItem Content="10"/>
+                    <ComboBoxItem Content="11"/>
+                    <ComboBoxItem Content="12"/>
+                    <ComboBoxItem Content="13"/>
+                    <ComboBoxItem Content="14"/>
+                    <ComboBoxItem Content="15"/>
+                    <ComboBoxItem Content="16"/>
+                    <ComboBoxItem Content="17"/>
+                    <ComboBoxItem Content="18"/>
+                    <ComboBoxItem Content="19"/>
+                    <ComboBoxItem Content="20"/>
+                    <ComboBoxItem Content="21"/>
+                    <ComboBoxItem Content="22"/>
+                    <ComboBoxItem Content="23"/>
+                    <ComboBoxItem Content="24"/>
+                    <ComboBoxItem Content="25"/>
+                    <ComboBoxItem Content="26"/>
+                    <ComboBoxItem Content="27"/>
+                    <ComboBoxItem Content="28"/>
+                    <ComboBoxItem Content="29"/>
+                    <ComboBoxItem Content="30"/>
+                    <ComboBoxItem Content="31"/>
+                    <ComboBoxItem Content="32"/>
+                    <ComboBoxItem Content="33"/>
+                    <ComboBoxItem Content="34"/>
+                    <ComboBoxItem Content="35"/>
+                    <ComboBoxItem Content="36"/>
+                    <ComboBoxItem Content="37"/>
+                    <ComboBoxItem Content="38"/>
+                    <ComboBoxItem Content="39"/>
+                    <ComboBoxItem Content="40"/>
+                    <ComboBoxItem Content="41"/>
+                    <ComboBoxItem Content="42"/>
+                    <ComboBoxItem Content="43"/>
+                    <ComboBoxItem Content="44"/>
+                    <ComboBoxItem Content="45"/>
+                    <ComboBoxItem Content="46"/>
+                    <ComboBoxItem Content="47"/>
+                    <ComboBoxItem Content="48"/>
+                    <ComboBoxItem Content="49"/>
+                    <ComboBoxItem Content="50"/>
+                    <ComboBoxItem Content="51"/>
+                    <ComboBoxItem Content="52"/>
+                    <ComboBoxItem Content="53"/>
+                    <ComboBoxItem Content="54"/>
+                    <ComboBoxItem Content="55"/>
+                    <ComboBoxItem Content="56"/>
+                    <ComboBoxItem Content="57"/>
+                    <ComboBoxItem Content="58"/>
+                    <ComboBoxItem Content="59"/>
+                </ComboBox>
+                <TextBlock HorizontalAlignment="Left" Height="18" Margin="10,40,0,0" TextWrapping="Wrap" Text="Luz seleccionada:" VerticalAlignment="Top" Foreground="#FF188DB0" FontSize="14" FontFamily="Consolas"/>
+                <ComboBox x:Name="cmbSelectedLight" HorizontalAlignment="Left" Height="20" Margin="155,40.5,0,0" VerticalAlignment="Top" Width="120">
+                    <ComboBoxItem Content="Baño Abajo Interior" Tag="01"/>
+                    <ComboBoxItem Content="Baño Arriba Interior" Tag="02"/>
+                    <ComboBoxItem Content="Sala" Tag="03"/>
+                    <ComboBoxItem Content="Oscar" Tag="04"/>
+                    <ComboBoxItem Content="Baño Arriba Exterior" Tag="05"/>
+                    <ComboBoxItem Content="Baño Abajo Exterior" Tag="06"/>
+                    <ComboBoxItem Content="Cuarto cosas" Tag="07"/>
+                    <ComboBoxItem Content="Cocina" Tag="08"/>
+                    <ComboBoxItem Content="Ventilador" Tag="09"/>
+                    <ComboBoxItem Content="Taller" Tag="10"/>
+                    <ComboBoxItem Content="Polli" Tag="11"/>
+                    <ComboBoxItem Content="Patio" Tag="12"/>
+                </ComboBox>
+                <TextBlock HorizontalAlignment="Left" Height="18" Margin="10,73.5,0,0" TextWrapping="Wrap" Text="Estado luz:" VerticalAlignment="Top" Foreground="#FF188DB0" FontSize="14" FontFamily="Consolas"/>
+                <ComboBox x:Name="cmbStatus" HorizontalAlignment="Left" Height="20" Margin="155,73.5,0,0" VerticalAlignment="Top" Width="120">
+                    <ComboBoxItem Content="Apagada" Tag="0"/>
+                    <ComboBoxItem Content="Encendida" Tag="1"/>
+                </ComboBox>
+                <Button x:Name="btnSaveAlarm" Content="Guardar alarma" HorizontalAlignment="Left" Height="35.5" Margin="10,0,0,167" VerticalAlignment="Bottom" Width="430.329" Click="btnGuardarAlarma_Click"/>
+                <ListBox x:Name="lstLog" Height="150" Margin="0,0,0,10" VerticalAlignment="Bottom" Width="430.329"/>
+            </Grid>
+            <TextBlock x:Name="txtTitle" HorizontalAlignment="Left" Margin="10,5,0,0" TextWrapping="Wrap" Text="Alarma" VerticalAlignment="Top" Foreground="#FF188DB0" FontSize="18" FontFamily="Consolas" Height="21.077" Width="59.38"/>
+        </Grid>
+    </Border>
+</UserControl>

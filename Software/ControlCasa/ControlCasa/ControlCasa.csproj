@@ -99,11 +99,7 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
-    <Page Include="Controls\ControlDedSec.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Controls\ControlTerminal.xaml">
+    <Page Include="Controls\Alarm.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -120,11 +116,8 @@
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="Classes\DragCanvas.cs" />
-    <Compile Include="Controls\ControlDedSec.xaml.cs">
-      <DependentUpon>ControlDedSec.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Controls\ControlTerminal.xaml.cs">
-      <DependentUpon>ControlTerminal.xaml</DependentUpon>
+    <Compile Include="Controls\Alarm.xaml.cs">
+      <DependentUpon>Alarm.xaml</DependentUpon>
     </Compile>
     <Compile Include="Controls\IndexMenu.xaml.cs">
       <DependentUpon>IndexMenu.xaml</DependentUpon>
@@ -168,13 +161,7 @@
     <Resource Include="Assets\images\dedsec.png" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="Assets\animations\cli2.gif" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="Assets\animations\4UzW8S83pWoKs.gif" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="Assets\animations\dedsec.gif" />
+    <Content Include="Assets\sounds\alarm.mp3" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

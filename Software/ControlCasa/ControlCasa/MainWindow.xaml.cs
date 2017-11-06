@@ -14,16 +14,19 @@ namespace ControlCasa
     public partial class MainWindow : Window
     {
         static ServiceClient serviceClient;
-        static string connectionString = "tu cadena de conexion";
+        //static string connectionString = "HostName=hubcasatulancingo.azure-devices.net;SharedAccessKeyName=iothubowner;SharedAccessKey=kfSWlvhPZMFvWPs+oObC3bFAB5rlTUQ800Xo3lHGBoY=";
+        static string connectionString = "HostName=secondhubcasa.azure-devices.net;SharedAccessKeyName=iothubowner;SharedAccessKey=cNJByRyM/1r5apig/TjO+bNxs25reC4hk6hvcalxnJY=";
+
         static string iotHubD2cEndpoint = "messages/events";
         static EventHubClient eventHubClient;
         EventHubReceiver eventHubReceiver;
         DispatcherTimer timer;
-
+        
         static SerialPort puertoSerial = new SerialPort();
         public MainWindow()
         {
             InitializeComponent();
+            ctrlAlarm.master = this;
 
             string portName = "COM4";
             puertoSerial.PortName = portName;
@@ -50,18 +53,28 @@ namespace ControlCasa
         private async Task HandleReceivedInformation()
         {
             EventData eventData = await eventHubReceiver.ReceiveAsync();
-            string data = Encoding.UTF8.GetString(eventData.GetBytes());
+            if (eventData != null)
+            {
+                string data = Encoding.UTF8.GetString(eventData.GetBytes());
 
-            JObject serializedObject = JObject.Parse(data);
-            string lightNumber = serializedObject["lightNumber"].ToString();
-            string lightStatus = serializedObject["lightStatus"].ToString();
-            DateTime lastMove = Convert.ToDateTime(serializedObject["date"]);
+                JObject serializedObject = JObject.Parse(data);
+                string lightNumber = serializedObject["lightNumber"].ToString();
+                string lightStatus = serializedObject["lightStatus"].ToString();
+                DateTime lastMove = Convert.ToDateTime(serializedObject["date"]);
 
-            HandleLights(lightNumber, lightStatus);
+                HandleLights(lightNumber, lightStatus);
+            }
         }
 
-        private void HandleLights(string light, string status)
+        public void HandleLights(string light, string status)
         {
+            if (light == "13")
+            {
+                ctrlAlarm.TriggerAlarm();
+                alarmSound.Source = (new Uri("../../Assets/sounds/alarm.mp3", UriKind.RelativeOrAbsolute));
+                alarmSound.Play();
+            }
+            
             string finalCommand = string.Format("{0},{1}", light, status);
 
             puertoSerial.Open();

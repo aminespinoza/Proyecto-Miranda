@@ -8,4 +8,13 @@
     <DeviceId>30F105C9-681E-420b-A277-7C086EAD8A4E</DeviceId>
     <UseEmulator>true</UseEmulator>
   </PropertyGroup>
+  <PropertyGroup>
+    <Source>C:\Users\Amin Espinoza\Documents\Visual Studio 2017\Projects\ControlCasa\CienteUniversal\Assets\Images\Logo_dedsec_white.png</Source>
+    <SmallTileSource>C:\Users\Amin Espinoza\Documents\Visual Studio 2017\Projects\ControlCasa\CienteUniversal\Assets\Images\Logo_dedsec_white.png</SmallTileSource>
+    <MediumTileSource>C:\Users\Amin Espinoza\Documents\Visual Studio 2017\Projects\ControlCasa\CienteUniversal\Assets\Images\Logo_dedsec_white.png</MediumTileSource>
+    <WideTileSource>C:\Users\Amin Espinoza\Documents\Visual Studio 2017\Projects\ControlCasa\CienteUniversal\Assets\Images\Logo_dedsec_white.png</WideTileSource>
+    <LargeTileSource>C:\Users\Amin Espinoza\Documents\Visual Studio 2017\Projects\ControlCasa\CienteUniversal\Assets\Images\Logo_dedsec_white.png</LargeTileSource>
+    <AppIconSource>C:\Users\Amin Espinoza\Documents\Visual Studio 2017\Projects\ControlCasa\CienteUniversal\Assets\Images\Logo_dedsec_white.png</AppIconSource>
+    <SplashScreenSource>C:\Users\Amin Espinoza\Documents\Visual Studio 2017\Projects\ControlCasa\CienteUniversal\Assets\Images\Logo_dedsec_white.png</SplashScreenSource>
+  </PropertyGroup>
 </Project>

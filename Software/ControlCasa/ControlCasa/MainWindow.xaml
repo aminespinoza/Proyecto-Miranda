@@ -11,10 +11,11 @@
         <Grid.Background>
             <ImageBrush ImageSource="Assets/images/hd_tech_blue.jpg"/>
         </Grid.Background>
+        <MediaElement x:Name="alarmSound" LoadedBehavior="Manual" Width="0" Height="0" HorizontalAlignment="Left" Volume="1" VerticalAlignment="Top"/>
         <canvas:DragCanvas AllowDragging="True" AllowDragOutOfView="False">
-            <Controls:ControlTerminal x:Name="ctrlTerminal" Height="310" Width="400" Canvas.Left="300" Canvas.Top="111"/>
-            <Controls:ControlDedSec x:Name="ctrlDedsec" Height="250" Width="472" Canvas.Left="809.282" Canvas.Top="358.474"/>
+  
         </canvas:DragCanvas>
+        <Controls:Alarm x:Name="ctrlAlarm" />
         <Controls:IndexMenu x:Name="ctrlIndex" Height="400" Width="300" HorizontalAlignment="Left" VerticalAlignment="Top"/>
     </Grid>
 </Window>
