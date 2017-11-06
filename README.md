@@ -27,6 +27,9 @@ En este proyecto hay un gran problema de rendimiento en la memoria RAM, la bibli
 
 Pensaba poner muchas imágenes y ventanas de este tipo pero este gran problema me detuvo. Hasta no encontrar otra opción o ver como optimizar las cosas solo habrá dos ventanas.
 
-## Commit 9
+## Commit 14
+
+Los controles tipo GIF han sido eliminados del proyecto para dar paso a controles funcionales. El primero en ser incluido es el **ControlAlarma** en donde podrás agendar el encender una luz con cierto tiempo de antelación.
+También está incluido el proyecto de control de luces por medio de un bot usando Microsoft Bot Framework. Este proyecto está por el momento vacío pero podrá funcionar en el siguiente commit.
 
 @aminespinoza
