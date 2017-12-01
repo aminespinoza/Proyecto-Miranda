@@ -1,7 +1,5 @@
-﻿using Microsoft.Azure.Devices.Client;
-using Newtonsoft.Json;
+﻿using Microsoft.Azure.Devices;
 using System;
-using System.Diagnostics;
 using System.Text;
 using System.Threading.Tasks;
 using Windows.Foundation.Metadata;
@@ -14,10 +12,9 @@ namespace CienteUniversal
 {
     public sealed partial class MainPage : Page
     {
-        static DeviceClient deviceClient;
-        static string iotHubUri = "secondhubcasa.azure-devices.net";
-        static string deviceKey = "Z0a9xNB1qPd1AXKyJHmvRVa3JQ51/au7wf/4b9yzD5A=";
-        static string deviceId = "maquinaCasa";
+        ServiceClient serviceClient;
+        string connectionString = "HostName=secondhubcasa.azure-devices.net;SharedAccessKeyName=iothubowner;SharedAccessKey=cNJByRyM/1r5apig/TjO+bNxs25reC4hk6hvcalxnJY=";
+
 
         bool luzPolliPrendida = false;
         bool luzOscarPrendida = false;
@@ -41,7 +38,7 @@ namespace CienteUniversal
         {
             base.OnNavigatedTo(e);
 
-            deviceClient = DeviceClient.Create(iotHubUri, AuthenticationMethodFactory.CreateAuthenticationWithRegistrySymmetricKey(deviceId, deviceKey), TransportType.Http1);
+            serviceClient = ServiceClient.CreateFromConnectionString(connectionString);
             InitializeUi();
         }
 
@@ -162,18 +159,9 @@ namespace CienteUniversal
 
         private async void SendDataToHub(string light, string handler)
         {
-            var telemetryDataPoint = new
-            {
-                lightNumber = light,
-                lightStatus = handler,
-                date = DateTime.Now
-            };
-
-            var messageString = JsonConvert.SerializeObject(telemetryDataPoint);
-            var message = new Message(Encoding.ASCII.GetBytes(messageString));
-
-            Debug.WriteLine(messageString);
-            await deviceClient.SendEventAsync(message);
+            string finalMessage = string.Format("{0},{1}", light, handler);
+            var commandMessage = new Message(Encoding.ASCII.GetBytes(finalMessage));
+            await serviceClient.SendAsync("testingDevice", commandMessage);
         } 
     }
 }
