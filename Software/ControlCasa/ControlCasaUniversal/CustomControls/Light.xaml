@@ -10,7 +10,7 @@
     d:DesignWidth="200">
 
     <Grid>
-        <Border x:Name="borBackground" BorderBrush="#FF2FB3FF" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" BorderThickness="3,3,3,3" Background="#330F6A9E">
+        <Border x:Name="borBackground" BorderBrush="#FF2FB3FF" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" BorderThickness="3,3,3,3" Background="{Binding IsLightOn, Converter={StaticResource lightConverter}, ElementName=Light}">
             <Grid HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
                 <TextBlock x:Name="txtLight" HorizontalAlignment="Center" Text="Taller" TextWrapping="Wrap" VerticalAlignment="Center" Foreground="#FF2FB3FF" FontFamily="Consolas" FontSize="20"/>
             </Grid>
