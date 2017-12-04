@@ -5,8 +5,7 @@
 En el caso del material requerido para esta ocasión va a cambiar mucho para cada escenario. Lo siguiente es lo adecuado.
 
 - Un módulo relay para cada luz que vas a controlar  
-- Un Arduino Mega (puedes usar otros modelos, recomiendo este solo por los pines).  
-- Un LED RGB por cada luz  
+- Un Arduino Mega (puedes usar otros modelos, recomiendo este solo por los pines). 
 - Un protoboard, entre más grande, mejor.
 
 ## La conexión
@@ -23,45 +22,52 @@ Recuerda que la configuración se modificará en función de la cantidad de luce
 
 ## El código de Arduino
 
-Dentro de la carpeta de [ControlLuces]("https://github.com/aminespinoza/Control-casa/tree/master/Hardware/ControlLuces") podrás encontrar la aplicación para Arduino que se encarga de controlar los relevadores que a su vez controlarán las luces. Hay varias observaciones que debes tener aquí.  
+Dentro de la carpeta de [ControlLuces]("https://github.com/aminespinoza/Control-casa/tree/master/Hardware/ControlCasa") podrás encontrar la aplicación para Arduino que se encarga de controlar los relevadores que a su vez controlarán las luces. Hay varias observaciones que debes tener aquí.  
 Lo primero es la declaración de las variables iniciales.
 
 ```c
-int relayOne = 2, redLedLightOne = 3, greenLedLightOne = 4;
-int relayTwo = 5, redLedLightTwo = 6, greenLedLightTwo = 7;
-int relayThree = 8, redLedLightThree = 9, greenLedLightThree = 10;
-int relayFour = 11, redLedLightFour = 12, greenLedLightFour = 13;
-int relayFive = 14, redLedLightFive = 15, greenLedLightFive = 16;
-int relaySix = 17, redLedLightSix = 18, greenLedLightSix = 19;
-int relaySeven = 20, redLedLightSeven = 21, greenLedLightSeven = 22;
-int relayEight = 23, redLedLightEight = 24, greenLedLightEight = 25;
-int relayNine = 26, redLedLightNine = 27, greenLedLightNine = 28;
-int relayTen = 29, redLedLightTen = 30, greenLedLightTen = 31;
-int relayEleven = 32, redLedLightEleven = 33, greenLedLightEleven = 34;
-int relayTwelve = 35, redLedLightTwelve = 36, greenLedLightTwelve = 37;
+int relayOne = 2;
+int relayTwo = 5;
+int relayThree = 8;
+int relayFour = 11;
+int relayFive = 22;
+int relaySix = 25;
+int relaySeven = 28;
+int relayEight = 31;
+int relayNine = 34;
+int relayTen = 37;
+int relayEleven = 40;
+int relayTwelve = 43;
 ```
-Por cada luz debes declarar un renglón de este tipo, el primer valor corresponde al pin de Arduino donde deberás colocar el relevador de corriente, el segundo valor donde deberás colocar el ánodo rojo del LED, el tercer valor donde deberás colocar el ánodo verde del LED.  
+Por cada luz debes declarar un renglón de este tipo, el valor corresponde al pin de Arduino donde deberás colocar el relevador de corriente.  
 
 ```c
 String data = "";
 char charBuf[4];
 ```
-Hay dos variables globales declaradas después de la función de **setup** y serán las que manejen y reciban los datos recibidos desde el puerto serial. Después, en la función **loop** verás que solo se trata de recibir un dato del puerto serial y si hay información recibida se ejecutará un método para manejar la luz adecuada. Observa que uso un método llamado **strcpy** que convierte el arreglo char* a un arreglo char.
+Hay dos variables globales declaradas después de la función de **setup** y serán las que manejen y reciban los datos recibidos desde el puerto serial. En la función **setup** puedes notar el canal de comunicación establecido para el protocolo **I2C** y el receptor del evento ejecutado al recibir información por este medio.
+
 ```c
-void loop()
+Serial.begin(9600);
+Wire.begin(0x40);
+Wire.onReceive(receiveEvent);
+```
+
+Después, en la función **loop** no necesitarás hacer nada debido que ahora todo se realizará en el método que declaraste para recibir la información de I2C.
+```c
+void receiveEvent(int howMany)
 {
-  if(Serial.available()>0)
+  data = "";
+  while( Wire.available())
   {
-    data = Serial.readString();
-    Serial.println(data);
-    char* charArray = data.c_str(); 
-    strcpy(charBuf, charArray);
+    data += (char)Wire.read();
   }
-  
+  char* charArray = data.c_str();
+  strcpy(charBuf, charArray);
   handleLightFromValue(charBuf[0], charBuf[1], charBuf[3]);
-  delay(1000);
 }
 ```
+
 El método **handleLightFromValue** recibe los dos primeros datos como el número de la luz que va a manipular y el tercer dato como el estado donde 0 corresponde a apagado y 1 a encendido.
 ```c
 void handleLightFromValue(char lightPosition, char lightSecondPosition, char lightValue)
@@ -72,40 +78,55 @@ void handleLightFromValue(char lightPosition, char lightSecondPosition, char lig
   switch (finalValue)
   {
     case 1:
-      ShowSpecificColor(lightValue, redLedLightOne, greenLedLightOne, relayOne);
+    Serial.println("Baño abajo interior");
+      HandleLight(lightValue, relayOne);
       break;
     case 2:
-      ShowSpecificColor(lightValue, redLedLightTwo, greenLedLightTwo, relayTwo);
+    Serial.println("Baño arriba interior");
+      HandleLight(lightValue, relayTwo);
       break;
     case 3:
-      ShowSpecificColor(lightValue, redLedLightThree, greenLedLightThree, relayThree);
+    Serial.println("Sala");
+      HandleLight(lightValue, relayThree);
       break;
     case 4:
-      ShowSpecificColor(lightValue, redLedLightFour, greenLedLightFour, relayFour);
+    Serial.println("Oscar");
+      HandleLight(lightValue, relayFour);
       break;
     case 5:
-      ShowSpecificColor(lightValue, redLedLightFive, greenLedLightFive, relayFive);
+    Serial.println("Baño arriba exterior");
+      HandleLight(lightValue, relayFive);
       break;
     case 6:
-      ShowSpecificColor(lightValue, redLedLightSix, greenLedLightSix, relaySix);
+    Serial.println("Baño abajo exterior");
+      HandleLight(lightValue, relaySix);
       break;
     case 7:
-      ShowSpecificColor(lightValue, redLedLightSeven, greenLedLightSeven, relaySeven);
+    Serial.println("Cuarto cosas");
+      HandleLight(lightValue, relaySeven);
       break;
     case 8:
-      ShowSpecificColor(lightValue, redLedLightEight, greenLedLightEight, relayEight);
+    Serial.println("led ocho");
+      HandleLight(lightValue, relayEight);
       break;
     case 9:
-      ShowSpecificColor(lightValue, redLedLightNine, greenLedLightNine, relayNine);
+    Serial.println("led nueve");
+      HandleLight(lightValue, relayNine);
       break;
     case 10:
-      ShowSpecificColor(lightValue, redLedLightTen, greenLedLightTen, relayTen);
+    Serial.println("Taller");
+      HandleLight(lightValue, relayTen);
       break;
     case 11:
-      ShowSpecificColor(lightValue, redLedLightEleven, greenLedLightEleven, relayEleven);
+    Serial.println("Polli");
+      HandleLight(lightValue, relayEleven);
       break;
     case 12:
-      ShowSpecificColor(lightValue, redLedLightTwelve, greenLedLightTwelve, relayTwelve);
+    Serial.println("Patio");
+      HandleLight(lightValue, relayTwelve);
+      break;
+    case 13:
+      TriggerAlarm();
       break;
     default:
     break;
@@ -114,30 +135,24 @@ void handleLightFromValue(char lightPosition, char lightSecondPosition, char lig
 ```
 En cualquier caso, un último método se invocará pero con los datos de variables adecuados.
 ```c
-void ShowSpecificColor(int lightStatus, int redLight, int greenLight, int relayNumber)
+void HandleLight(int lightStatus, int relayNumber)
 {
-  if(lightStatus == '1')
+  if(lightStatus == '0')
   {
     digitalWrite(relayNumber, LOW);
-    digitalWrite(redLight, HIGH);
-    digitalWrite(greenLight, LOW);
   }
-  else if(lightStatus == '0')
+  else if(lightStatus == '1')
   {
     digitalWrite(relayNumber, HIGH);
-    digitalWrite(redLight, LOW);
-    digitalWrite(greenLight, HIGH);
   }
 }
 ```
-Es un proceso sumamente fácil. Además hacemos que Arduino funcione como una tarjeta meramente transaccional, que solo gestiona los relevadores basándose en la información recibida por el puerto serial.
+Es un proceso sumamente fácil. Además hacemos que Arduino funcione como una tarjeta meramente transaccional, que solo gestiona los relevadores basándose en la información recibida por el protocolo I2C.
 
 ## Las pruebas
 
-Debido a que este es el primer paso del proyecto y quizá el más delicado como fuente de errores debido a las soldaduras, arreglo de pines, etcétera. Antes de continuar, te recomiendo muchísimo no avanzar hasta hacer una prueba muy sencilla. Ingresa en el monitor serial datos como 01,1 o 01,0 y deberás ver que el relevador ubicado en esta posición se encienda o apague. 
+Debido a que este es el primer paso del proyecto y quizá el más delicado como fuente de errores debido a las soldaduras, arreglo de pines, etcétera. Antes de continuar, te recomiendo muchísimo no avanzar hasta hacer una prueba muy sencilla. La mejor manera de enviar información es hacerlo usando la misma aplicación de Windows pero de modo local.
 
-<img src="http://www.cs.binghamton.edu/~tbarten1/CS120_Summer_2013/Labs/Lab5/arduino_serial_monitor.png"/> 
-
-Es una prueba muy fácil y que te permitirá comprobar que ya tienes todo listo para continuar con el proceso. Después de todo esto, podrás comenzar ya con la aplicación de WPF que recibirá toda la información y la enviará por COM a Arduino.
+Es una prueba muy fácil y que te permitirá comprobar que ya tienes todo listo para continuar con el proceso. Después de todo esto, podrás comenzar ya con la aplicación de Windows 10 IoT que recibirá toda la información y la enviará por I2C a Arduino.
 
 

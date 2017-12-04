@@ -1,128 +1,163 @@
-# Aplicaciones cliente UWP y administrador WPF
+# Aplicaciones cliente UWP y administrador UWP
 
-En esta sección tengo dos proyectos. El primero corresponde a una aplicación WPF que será el administrador y quien enviará la información a Arduino. El segundo proyecto corresponde a una aplicación cliente para UWP que será la que envíe la infromación a la nube y de ahí la aplicación administrador recibirá la información.
+En esta sección tengo tres proyectos proyectos, todos dentro de una misma solución en Visual Studio.
 
-## Aplicación administrador (hecha con WPF)
+Los proyectos son los siguientes:
 
-La aplicación para la administración de las luces desde el equipo es sumamente fácil, de hecho, hasta este último [commit](https://github.com/aminespinoza/Control-casa/commit/3ea3b78c247193a45440ba186134d67641357257) la aplicación no cuenta con una interfaz en lo absoluto, simplemente recibe la información desde Azure, la procesa y envía a Arduino. La intención es que paulatinamente pueda agregar cosas nuevas aquí para expandir la funcionalidad.
+- Un bot que es capaz de enviar mensajes al dispositivo por medio de una Azure Function.
+- Un cliente hecho con UWP capaz de enviar mensajes al dispositivo por medio de IoT Hub.
+- Un administrador capaz de recibir los mensajes que IoT Hub le envía y procesarlos para encender o apagar luces.
 
-Por ahora, lo único que vale la pena ver de este proyecto es lo siguiente:  
-En primer lugar establece el nombre del puerto por medio del cuál te vas a comunicar con Arduino así como el baudrate que usarás.
-```c
-string portName = "COM4";
-puertoSerial.PortName = portName;
-puertoSerial.BaudRate = 9600;
-```
-Después, nota que establecerás la comunicación con el IoT Hub por medio de los valores siguientes. El número **3** dentro del método CreateReceiver tiene que ver con el partitionId de IoT Hub, para poder saber cuantos tienes y cuál se usa está la línea siguiente. Las opciones son pocas y puedes llegar por descartamiento. Por último un temporizador que obviamente estará cada segundo viendo si se encuentra algún nuevo mensaje ya disponible.
-```c
-serviceClient = ServiceClient.CreateFromConnectionString(connectionString);
+<img src="Assets/Img01.jpg" width="430" height="160"/>
 
-eventHubClient = EventHubClient.CreateFromConnectionString(connectionString, iotHubD2cEndpoint);
-eventHubReceiver = eventHubClient.GetDefaultConsumerGroup().CreateReceiver("3", DateTime.UtcNow);
+## La aplicación administrador UWP
 
-var d2cPartitions = eventHubClient.GetRuntimeInformation().PartitionIds;
+El administrador de todas las luces y quien se conecta de manera directa a Arduino es una aplicación UWP que muestra en pantalla la siguiente interfaz.
 
-timer = new DispatcherTimer();
-timer.Interval = TimeSpan.FromSeconds(1);
-timer.Tick += Timer_Tick;
-timer.Start();
-```
-El temporizador solo desencadena el evento **HandleReceivedInformation** que obtendrá la información del IoT Hub y después lo procesará usando serialización de JSON para los dos primeros valores que ocupamos.
-```c
-private async Task HandleReceivedInformation()
+--Foto de como luce el sistema--
+
+Los botones desplegados en esta aplicación son **User controls** y se utilizan para reflejar el estado de cada luz por medio de una propiedad llamada **isLightOn**.
+```csharp
+public bool IsLightOn
 {
-	EventData eventData = await eventHubReceiver.ReceiveAsync();
-	string data = Encoding.UTF8.GetString(eventData.GetBytes());
-
-	JObject serializedObject = JObject.Parse(data);
-	string lightNumber = serializedObject["lightNumber"].ToString();
-	string lightStatus = serializedObject["lightStatus"].ToString();
-	DateTime lastMove = Convert.ToDateTime(serializedObject["date"]);
-
-	HandleLights(lightNumber, lightStatus);
+	get { return isLightOn; }
+	set { isLightOn = value; NotifyPropertyChanged("IsLightOn"); }
 }
 ```
-El método final, llamado HandleLights solo recibe el texto, lo formatea de la manera esperada, abrirá el puerto y después envía el texto para que por último solo cierre el puerto. Esta parte es de gran importancia puesto que mantener el puerto abierto de manera permanente solo hará que la conexión colapse y la aplicación deje de funcionar sin emitir ningún error lo que dificultará mucho poder ubicar el problema de manera veloz. Entre menos operaciones se hagan con el puerto abierto será mucho mejor, es por eso que solo se hará la única indispensable que es escribir sobre el mismo puerto. Como ventaja adicional encontré que esto también mantiene en buen estado el consumo de memoria RAM de la aplicación, si abrimos el puerto todo el tiempo la memoria se incrementa paulatinamente hasta un 50 por ciento.
-```c
-private void HandleLights(string light, string status)
-{
-	string finalCommand = string.Format("{0},{1}", light, status);
 
-	puertoSerial.Open();
-	puertoSerial.Write(finalCommand);
-	puertoSerial.Close();
+El resultado de todo esto es reflejado gracias a un convertidor llamado **LightConverter** (muy ocurrente el nombre ¿no?).
+```csharp
+public object Convert(object value, Type targetType, object parameter, string language)
+{
+	bool isDecided = (bool)value;
+
+	if (isDecided)
+	{
+		return new SolidColorBrush(Color.FromArgb(255, 15, 106, 158));
+	}
+	else
+	{
+		return new SolidColorBrush(Color.FromArgb(51, 15, 106, 158));
+	}
 }
 ```
-Hasta aquí es todo lo que la aplicación de WPF hace por el momento. Considera que esta aplicación, por ser el administrador, será en la que más trabajaremos y en la que más cambios iremos viendo en todo momento.
+
+En Main Page podrás encontrar la comunicación por medio de I2C en el método **InitiateMonitoring**.
+```csharp
+private async void IniciateMonitoring()
+{
+	var settings = new I2cConnectionSettings(0x40);
+	settings.BusSpeed = I2cBusSpeed.StandardMode;
+	string aqs = I2cDevice.GetDeviceSelector();
+	IReadOnlyList<DeviceInformation> devices = await DeviceInformation.FindAllAsync(aqs);
+	bridgeDevice = await I2cDevice.FromIdAsync(devices[0].Id, settings);
+}
+```
+
+Ahí mismo podrás ver el método que recibe el mensaje del IoT Hub y lo procesa para enviar a Arduino.
+```csharp
+private async void ReceiveMessage()
+{
+	while (true)
+	{
+		Message receivedMessage = await deviceClient.ReceiveAsync();
+		if (receivedMessage == null) continue;
+		Debug.WriteLine(Encoding.ASCII.GetString(receivedMessage.GetBytes()));
+
+		await deviceClient.CompleteAsync(receivedMessage);
+		bridgeDevice.Write(receivedMessage.GetBytes());
+	}
+}
+```
 
 ## La aplicación cliente UWP
 
 El segundo proyecto dentro de esta solución es una Aplicación Universal de Windows y es simplemente un conjunto de doce botones que corresponden a cada una de las luces presentadas.
 
-<img src="Assets/UWPInterface.jpg" width="300" height="410"/>
+<img src="Assets/UWPInterface.jpg" width="650" height="350"/>
 
 Cada botón ejecuta el mismo método solo que obviamente con cada una de sus variables.
-```c
+```csharp
 private void btnTaller_Click(object sender, RoutedEventArgs e)
 {
 	HandleLightStatus("10", ref luzTallerPrendida);
 }
 ```
 Este método llamado **HandleLightStatus** solo fue creado para ser un punto medio antes de subir información a la nube. El método que sube información al IoT Hub es de tipo asíncrono y por la naturaleza del mismo no es posible usar parámetros con referencia de valores y esto es sumamente útil para mantener el estado de cada luz dentro de la aplicación así que crear dos métodos fue la mejor solución, además, así cumplimos la premisa de que cada método debe llevar una sola función.
-```c
+```csharp
 private void HandleLightStatus(string light, ref bool handler)
 {
 	if (handler)
-	{
 		SendDataToHub(light, "0");
-	}
 	else
-	{
 		SendDataToHub(light, "1");
-	}
 
 	handler = !handler;
 }
 ```
-El método **SendDataToHub** recibe los parámetros esperados para crear una cadena con formato JSON que será la que se envíe al IoT Hub, solo para validar que todo va en orden, la misma cadena se imprime en la terminal de salida de Visual Studio.
-```c
+El método **SendDataToHub** recibe los parámetros esperados para crear una cadena básica que será la que se envíe al IoT Hub, hasta este caso te podría ser posible utilizar la secciónn de Cloud to Device para hacer exactamente lo mismo que este método.
+```csharp
 private async void SendDataToHub(string light, string handler)
 {
-	var telemetryDataPoint = new
-	{
-		lightNumber = light,
-		lightStatus = handler,
-		date = DateTime.Now
-	};
-
-	var messageString = JsonConvert.SerializeObject(telemetryDataPoint);
-	var message = new Message(Encoding.ASCII.GetBytes(messageString));
-
-	Debug.WriteLine(messageString);
-	await deviceClient.SendEventAsync(message);
+	string finalMessage = string.Format("{0},{1}", light, handler);
+	var commandMessage = new Message(Encoding.ASCII.GetBytes(finalMessage));
+	await serviceClient.SendAsync("testingDevice", commandMessage);
 }
 ```
-## Las pruebas
 
-La primera prueba que debes ver aquí es comprobar que en la terminal de salida de Visual Studio se imprime un texto en formato JSON como el siguiente.
-```c
-{"lightNumber":"10","lightStatus":"1","date":"2017-06-17T04:25:15.1160018-05:00"}
-```
-<img src="Assets/json.jpg" width="748" height="410"/>
+## El bot
 
-La segunda prueba es que usando el [Device Explorer](https://github.com/Azure/azure-iot-sdk-csharp/tree/master/tools/DeviceExplorer) para IoT Hub puedas ver que si estás enviando la información a la nube, obviamente esta prueba la podrás hacer únicamente después de la configuración de toda tu infraestructura en la última seccion.
+Como proyecto adicional se encuentra la opción de controlar todas las luces por medio de un bot y esto implica ciertos temas importantes a considerar. 
 
-Con respecto a la aplicación de WPF, puedes escribir en el método **HandleLights** por un momento un poco de código **hardcoded** que pueda funcionar de la siguiente manera.
-```c
-private void HandleLights(string light, string status)
+Las consideraciones son:  
+	- Usaremos tarjetas adaptables para controlar las luces pero este modelo aún no es enteramente productivo, puedes ver la matriz de opciones en [este enlace](https://docs.microsoft.com/en-us/adaptive-cards/get-started/bots#channel-status).
+	- No hay una manera directa de que el bot pueda enviar información debido a que el SDK de C# IoT no es compatible con el modelo de comunicación serializable que se utiliza en el bot y tampoco es posible utilizar el API REST de IoT Hub debido a que por este medio no es posible aún enviar mensajes de tipo C2D, como consecuencia de esto es que implementamos una Azure Function que puedes ver en la sección de infraestructura.
+
+Con estas consideraciones entonces podemos ya ver lo relevante del proyecto del bot.
+
+Lo primero es que necesitas agregar el [paquete de Nuget](https://www.nuget.org/packages/AdaptiveCards/1.0.0-beta10) para tarjetas adaptables, este paquete está en modo *Pre release* pero funciona bastante bien. Es aquí donde puedes ver cómo invocar a la tarjeta adaptable por medio de un formato de JSON, esto hace las cosas mucho más funcionales debido a que de esta manera puedes utilizar el [visualizador](http://adaptivecards.io/visualizer/) para crear la tarjeta que desees y después solo invocarla sin problema.
+
+
+```csharp
+if (activity.Text.ToLower() == "arriba" || activity.Text.ToLower() == "abajo")
 {
-	string finalCommand = "01,1";
+	string levelSelector = activity.Text;
 
-	puertoSerial.Open();
-	puertoSerial.Write(finalCommand);
-	puertoSerial.Close();
+	HttpClient client = new HttpClient();
+	HttpResponseMessage response;
+	AdaptiveCard card = new AdaptiveCard();
+	response = await client.GetAsync(String.Format("http://aminespinoza.com/docs/tarjeta{0}.json", levelSelector));
+	var json = await response.Content.ReadAsStringAsync();
+	AdaptiveCardParseResult resultString = AdaptiveCard.FromJson(json);
+	card = resultString.Card;
+	IList<AdaptiveWarning> warnings = resultString.Warnings;
+
+
+	Attachment attachment = new Attachment()
+	{
+		ContentType = AdaptiveCard.ContentType,
+		Content = card
+	};
+	reply.Attachments.Add(attachment);
 }
 ```
-Hacer esto te hará comprobar que la comunicación entre WPF y Arduino está sucediendo de la manera esperada y que podrás avanzar sin problemas hasta aquí. 
 
-También, en la aplicación WPF debes asignar el puerto COM, este puerto lo puedes obtener desde la aplicación de Arduino (te aparece en la configuración del puerto), también asegúrate de que no tengas abierto el monitor serial de Arduino pues toma control del puerto y solo puede haber un enlace, ya sea la aplicación WPF o el monitor serial de Arduino, así que no tengas nada abierto que utilice este puerto para evitar errores.
+Después de haber probado con la tarjeta adaptable, podrás ver la manera de invocar a la Azure Function en donde como parámetros enviarás la luz y estado que deseas obtener y así la función se encargará de ejecutar el movimiento.
+```csharp
+private async void SendDataToFunction(string light, string handler)
+{
+	HttpClient request = new HttpClient();
+	var requestedLink = new Uri("https://funcionescasa.azurewebsites.net/api/IotMessenger?code=bCnOkQEqLxiLYhkxZ4xXYXzTm7Wo9NwyOQuuhM/e1Jur0yVfGj0acw==");
+	HttpRequestMessage requestMessage = new HttpRequestMessage(HttpMethod.Post, requestedLink);
+
+	var sendString = String.Format("{{\"DeviceId\":\"testingDevice\",\"Message\":\"{0},{1}\"}}", light, handler);
+
+	requestMessage.Content = new StringContent(sendString, Encoding.UTF8, "application/json");
+
+	HttpResponseMessage response = await request.SendAsync(requestMessage);
+	var responseString = await response.Content.ReadAsStringAsync();
+}
+```
+
+Esto es hasta ahora todo lo que lleva este proyecto, puedes ver en la página principal todos los cambios que están por venir con cada nuevo commit.
+
