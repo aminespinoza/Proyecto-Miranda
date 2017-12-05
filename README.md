@@ -16,6 +16,12 @@ El proyecto ha sido rediseñado por completo. Los leds se ha eliminado y hemos r
 
 ## Arquitectura de la aplicación
 
+<img src="Assets/Arquitectura.JPG"/>
 
+En un caso se trata de una aplicación de tipo UWP que es capaz de comunicarse directamente con el IoT Hub encargado de enviar los mensajes a la aplicación administrador también de tipo UWP pero hospedada en una Raspberry Pi 3.
+
+Por otro lado, un bot que por medio de un web site tendrá la capacidad de enviar los mismos mensajes pero gracias a una Azure Function que será la encargada de manejarlos.
+
+En las tres secciones encontrarás todo lo necesario para poder trabajar en este proyecto.
 
 @aminespinoza
