@@ -104,7 +104,6 @@
     <Compile Include="Controls\Terminal.xaml.cs">
       <DependentUpon>Terminal.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Converters\LightConverter.cs" />
     <Compile Include="CustomControls\Light.xaml.cs">
       <DependentUpon>Light.xaml</DependentUpon>
     </Compile>

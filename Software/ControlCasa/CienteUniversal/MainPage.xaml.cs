@@ -31,15 +31,15 @@ namespace CienteUniversal
 
         public MainPage()
         {
-            this.InitializeComponent();
+            InitializeComponent();
         }
 
-        protected override void OnNavigatedTo(NavigationEventArgs e)
+        protected async override void OnNavigatedTo(NavigationEventArgs e)
         {
             base.OnNavigatedTo(e);
 
             serviceClient = ServiceClient.CreateFromConnectionString(connectionString);
-            InitializeUi();
+            await InitializeUi();
         }
 
         private async Task InitializeUi()
@@ -66,7 +66,7 @@ namespace CienteUniversal
             HandleAlarm();
         }
 
-        private void btnPolli_Click(object sender, RoutedEventArgs e)
+        private void btnJuegos_Click(object sender, RoutedEventArgs e)
         {
             HandleLightStatus("11", ref luzPolliPrendida);
             hideDown.Begin();
@@ -126,7 +126,7 @@ namespace CienteUniversal
             hideUp.Begin();
         }
 
-        private void btnCuartoCosas_Click(object sender, RoutedEventArgs e)
+        private void btnGimnasio_Click(object sender, RoutedEventArgs e)
         {
             HandleLightStatus("07", ref luzCosasPrendida);
             hideUp.Begin();
@@ -141,13 +141,9 @@ namespace CienteUniversal
         private void HandleLightStatus(string light, ref bool handler)
         {
             if (handler)
-            {
                 SendDataToHub(light, "0");
-            }
             else
-            {
                 SendDataToHub(light, "1");
-            }
 
             handler = !handler;
         }
@@ -162,6 +158,6 @@ namespace CienteUniversal
             string finalMessage = string.Format("{0},{1}", light, handler);
             var commandMessage = new Message(Encoding.ASCII.GetBytes(finalMessage));
             await serviceClient.SendAsync("testingDevice", commandMessage);
-        } 
+        }
     }
 }

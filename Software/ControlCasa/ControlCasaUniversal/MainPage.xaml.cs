@@ -1,12 +1,11 @@
 ﻿using Microsoft.Azure.Devices.Client;
-using System.Diagnostics;
+using System;
+using System.Collections.Generic;
 using System.Text;
 using Windows.Devices.Enumeration;
 using Windows.Devices.I2c;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Navigation;
-using System;
-using System.Collections.Generic;
 
 namespace ControlCasaUniversal
 {
@@ -19,8 +18,7 @@ namespace ControlCasaUniversal
         static string deviceId = "testingDevice";
         public MainPage()
         {
-            this.InitializeComponent();
-            
+            InitializeComponent();
         }
 
         protected override void OnNavigatedTo(NavigationEventArgs e)
@@ -47,10 +45,59 @@ namespace ControlCasaUniversal
             {
                 Message receivedMessage = await deviceClient.ReceiveAsync();
                 if (receivedMessage == null) continue;
-                Debug.WriteLine(Encoding.ASCII.GetString(receivedMessage.GetBytes()));
 
+                HandleButtons(Encoding.ASCII.GetString(receivedMessage.GetBytes()));
                 await deviceClient.CompleteAsync(receivedMessage);
                 bridgeDevice.Write(receivedMessage.GetBytes());
+            }
+        }
+
+        private void HandleButtons(string receivedMessage)
+        {
+            string[] lightArray = receivedMessage.Split(',');
+            string lightNumber = lightArray[0];
+            string lightStatus = lightArray[1];
+
+            bool decision = Convert.ToBoolean(Convert.ToInt32(lightStatus)); ;
+
+            switch (lightNumber)
+            {
+                case "01":
+                    ctrlBanoAbjInt.IsLightOn = decision;
+                    break;
+                case "02":
+                    ctrlBanoArrInt.IsLightOn = decision;
+                    break;
+                case "03":
+                    ctrlSala.IsLightOn = decision;
+                    break;
+                case "04":
+                    ctrlOscar.IsLightOn = decision;
+                    break;
+                case "05":
+                    ctrlBanoArrExt.IsLightOn = decision;
+                    break;
+                case "06":
+                    ctrlBanoAbjExt.IsLightOn = decision;
+                    break;
+                case "07":
+                    ctrlGimnasio.IsLightOn = decision;
+                    break;
+                case "08":
+                    ctrlBanoAbjInt.IsLightOn = decision;
+                    break;
+                case "09":
+                    ctrlVentilador.IsLightOn = decision;
+                    break;
+                case "10":
+                    ctrlTaller.IsLightOn = decision;
+                    break;
+                case "11":
+                    ctrlJuegos.IsLightOn = decision;
+                    break;
+                case "12":
+                    ctrlPatio.IsLightOn = decision;
+                    break;
             }
         }
     }

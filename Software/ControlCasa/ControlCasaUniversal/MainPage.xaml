@@ -11,7 +11,7 @@
     <Grid Background="Azure">
         <Image HorizontalAlignment="Stretch" Margin="0" VerticalAlignment="Stretch" Source="Assets/background/hd_tech_blue.jpg" Stretch="Fill"/>
         <Custom:Light x:Name="ctrlTaller" LightName="Taller" Width="200" Height="100" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="10,10,0,0"/>
-        <Custom:Light x:Name="cmbJuegos" LightName="Sala juegos" Width="200" Height="100" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="10,120,0,0"/>
+        <Custom:Light x:Name="ctrlJuegos" LightName="Sala juegos" Width="200" Height="100" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="10,120,0,0"/>
         <Custom:Light x:Name="ctrlPatio" LightName="Patio" Width="200" Height="100" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="10,230,0,0"/>
         <Custom:Light x:Name="ctrlCocina" LightName="Cocina" Width="200" Height="100" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="10,340,0,0"/>
         <Custom:Light x:Name="ctrlSala" LightName="Sala" Width="200" Height="100" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="220,10,0,0"/>

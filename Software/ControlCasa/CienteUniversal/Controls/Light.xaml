@@ -1,0 +1,19 @@
+﻿<UserControl
+    x:Class="CienteUniversal.Controls.Light"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:CienteUniversal.Controls"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d"
+    Height="45"
+    d:DesignWidth="400">
+
+    <Grid>
+        <Border x:Name="borBackground" BorderBrush="#FF2FB3FF" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" BorderThickness="3,3,3,3">
+            <Grid HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
+                <TextBlock x:Name="txtLight" HorizontalAlignment="Center" Text="Taller" TextWrapping="Wrap" VerticalAlignment="Center" Foreground="#FF2FB3FF" FontFamily="Consolas" FontSize="20"/>
+            </Grid>
+        </Border>
+    </Grid>
+</UserControl>
