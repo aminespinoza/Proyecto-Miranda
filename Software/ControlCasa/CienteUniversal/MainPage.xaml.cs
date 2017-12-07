@@ -1,5 +1,5 @@
-﻿using Microsoft.Azure.Devices;
-using System;
+﻿using System;
+using System.Net.Http;
 using System.Text;
 using System.Threading.Tasks;
 using Windows.Foundation.Metadata;
@@ -12,10 +12,6 @@ namespace CienteUniversal
 {
     public sealed partial class MainPage : Page
     {
-        ServiceClient serviceClient;
-        string connectionString = "HostName=secondhubcasa.azure-devices.net;SharedAccessKeyName=iothubowner;SharedAccessKey=cNJByRyM/1r5apig/TjO+bNxs25reC4hk6hvcalxnJY=";
-
-
         bool luzPolliPrendida = false;
         bool luzOscarPrendida = false;
         bool luzBanoAbjIntPrendida = false;
@@ -37,8 +33,6 @@ namespace CienteUniversal
         protected async override void OnNavigatedTo(NavigationEventArgs e)
         {
             base.OnNavigatedTo(e);
-
-            serviceClient = ServiceClient.CreateFromConnectionString(connectionString);
             await InitializeUi();
         }
 
@@ -141,23 +135,30 @@ namespace CienteUniversal
         private void HandleLightStatus(string light, ref bool handler)
         {
             if (handler)
-                SendDataToHub(light, "0");
+                SendDataToCloud(light, "0");
             else
-                SendDataToHub(light, "1");
+                SendDataToCloud(light, "1");
 
             handler = !handler;
         }
 
         private void HandleAlarm()
         {
-            SendDataToHub("13", "0");
+            SendDataToCloud("13", "0");
         }
 
-        private async void SendDataToHub(string light, string handler)
+        private async void SendDataToCloud(string light, string handler)
         {
-            string finalMessage = string.Format("{0},{1}", light, handler);
-            var commandMessage = new Message(Encoding.ASCII.GetBytes(finalMessage));
-            await serviceClient.SendAsync("testingDevice", commandMessage);
+            HttpClient request = new HttpClient();
+            var requestedLink = new Uri("https://funcionescasa.azurewebsites.net/api/IotMessenger?code=bCnOkQEqLxiLYhkxZ4xXYXzTm7Wo9NwyOQuuhM/e1Jur0yVfGj0acw==");
+            HttpRequestMessage requestMessage = new HttpRequestMessage(HttpMethod.Post, requestedLink);
+
+            var sendString = String.Format("{{\"DeviceId\":\"testingDevice\",\"Message\":\"{0},{1}\"}}", light, handler);
+
+            requestMessage.Content = new StringContent(sendString, Encoding.UTF8, "application/json");
+
+            HttpResponseMessage response = await request.SendAsync(requestMessage);
+            var responseString = await response.Content.ReadAsStringAsync();
         }
     }
 }
