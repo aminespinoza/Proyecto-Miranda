@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+  <string name="app_name">Cliente casa</string>
+  <string name="abj_name">Piso de abajo</string>
+  <string name="arr_name">Piso de arriba</string>
+</resources>

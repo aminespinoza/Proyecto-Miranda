@@ -29,4 +29,11 @@ En las tres secciones encontrarás todo lo necesario para poder trabajar en este
 Los botones de luz en la Raspberry cambian ya su estado dependiendo del estado de la luz.
 Se agregó un nuevo control de usuario en la aplicación cliente para eliminar el uso de botones y visualizar el estado de cada luz.
 
+##Commit 18
+
+<img src="Assets/Arquitectura18.JPG"/>
+
+**Xamarin is in the house!!!!!**  
+Se eliminó el uso del SDK de IoT en la aplicación cliente UWP, ahora todos los clientes (bot, Android y UWP) envían los mensajes por medio de Azure Functions.
+
 @aminespinoza

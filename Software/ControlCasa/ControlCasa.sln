@@ -9,6 +9,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BotCasa", "BotCasa\BotCasa.
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ControlCasaUniversal", "ControlCasaUniversal\ControlCasaUniversal.csproj", "{02201BB2-847F-4D93-BBD3-5358990C9693}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ClienteAndroid", "ClienteAndroid\ClienteAndroid.csproj", "{19693DCC-86D1-40E0-A225-B4548F1310ED}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -77,6 +79,30 @@ Global
 		{02201BB2-847F-4D93-BBD3-5358990C9693}.Release|x86.ActiveCfg = Release|x86
 		{02201BB2-847F-4D93-BBD3-5358990C9693}.Release|x86.Build.0 = Release|x86
 		{02201BB2-847F-4D93-BBD3-5358990C9693}.Release|x86.Deploy.0 = Release|x86
+		{19693DCC-86D1-40E0-A225-B4548F1310ED}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{19693DCC-86D1-40E0-A225-B4548F1310ED}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{19693DCC-86D1-40E0-A225-B4548F1310ED}.Debug|Any CPU.Deploy.0 = Debug|Any CPU
+		{19693DCC-86D1-40E0-A225-B4548F1310ED}.Debug|ARM.ActiveCfg = Debug|Any CPU
+		{19693DCC-86D1-40E0-A225-B4548F1310ED}.Debug|ARM.Build.0 = Debug|Any CPU
+		{19693DCC-86D1-40E0-A225-B4548F1310ED}.Debug|ARM.Deploy.0 = Debug|Any CPU
+		{19693DCC-86D1-40E0-A225-B4548F1310ED}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{19693DCC-86D1-40E0-A225-B4548F1310ED}.Debug|x64.Build.0 = Debug|Any CPU
+		{19693DCC-86D1-40E0-A225-B4548F1310ED}.Debug|x64.Deploy.0 = Debug|Any CPU
+		{19693DCC-86D1-40E0-A225-B4548F1310ED}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{19693DCC-86D1-40E0-A225-B4548F1310ED}.Debug|x86.Build.0 = Debug|Any CPU
+		{19693DCC-86D1-40E0-A225-B4548F1310ED}.Debug|x86.Deploy.0 = Debug|Any CPU
+		{19693DCC-86D1-40E0-A225-B4548F1310ED}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{19693DCC-86D1-40E0-A225-B4548F1310ED}.Release|Any CPU.Build.0 = Release|Any CPU
+		{19693DCC-86D1-40E0-A225-B4548F1310ED}.Release|Any CPU.Deploy.0 = Release|Any CPU
+		{19693DCC-86D1-40E0-A225-B4548F1310ED}.Release|ARM.ActiveCfg = Release|Any CPU
+		{19693DCC-86D1-40E0-A225-B4548F1310ED}.Release|ARM.Build.0 = Release|Any CPU
+		{19693DCC-86D1-40E0-A225-B4548F1310ED}.Release|ARM.Deploy.0 = Release|Any CPU
+		{19693DCC-86D1-40E0-A225-B4548F1310ED}.Release|x64.ActiveCfg = Release|Any CPU
+		{19693DCC-86D1-40E0-A225-B4548F1310ED}.Release|x64.Build.0 = Release|Any CPU
+		{19693DCC-86D1-40E0-A225-B4548F1310ED}.Release|x64.Deploy.0 = Release|Any CPU
+		{19693DCC-86D1-40E0-A225-B4548F1310ED}.Release|x86.ActiveCfg = Release|Any CPU
+		{19693DCC-86D1-40E0-A225-B4548F1310ED}.Release|x86.Build.0 = Release|Any CPU
+		{19693DCC-86D1-40E0-A225-B4548F1310ED}.Release|x86.Deploy.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

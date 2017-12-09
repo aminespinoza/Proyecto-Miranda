@@ -12,14 +12,14 @@ namespace CienteUniversal
 {
     public sealed partial class MainPage : Page
     {
-        bool luzPolliPrendida = false;
+        bool luzJuegosPrendida = false;
         bool luzOscarPrendida = false;
         bool luzBanoAbjIntPrendida = false;
         bool luzBanoAbjExtPrendida = false;
         bool luzBanoArrIntPrendida = false;
         bool luzBanoArrExtPrendida = false;
         bool luzSalaPrendida = false;
-        bool luzCosasPrendida = false;
+        bool luzGimnasioPrendida = false;
         bool luzCocinaPrendida = false;
         bool luzVentiladorPrendida = false;
         bool luzTallerPrendida = false;
@@ -62,7 +62,7 @@ namespace CienteUniversal
 
         private void btnJuegos_Click(object sender, RoutedEventArgs e)
         {
-            HandleLightStatus("11", ref luzPolliPrendida);
+            HandleLightStatus("11", ref luzJuegosPrendida);
             hideDown.Begin();
         }
 
@@ -122,7 +122,7 @@ namespace CienteUniversal
 
         private void btnGimnasio_Click(object sender, RoutedEventArgs e)
         {
-            HandleLightStatus("07", ref luzCosasPrendida);
+            HandleLightStatus("07", ref luzGimnasioPrendida);
             hideUp.Begin();
         }
 
