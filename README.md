@@ -24,12 +24,12 @@ Por otro lado, un bot que por medio de un web site tendrá la capacidad de envia
 
 En las tres secciones encontrarás todo lo necesario para poder trabajar en este proyecto.
 
-##Commit 16
+## Commit 16
 
 Los botones de luz en la Raspberry cambian ya su estado dependiendo del estado de la luz.
 Se agregó un nuevo control de usuario en la aplicación cliente para eliminar el uso de botones y visualizar el estado de cada luz.
 
-##Commit 18
+## Commit 18
 
 <img src="Assets/Arquitectura18.JPG"/>
 

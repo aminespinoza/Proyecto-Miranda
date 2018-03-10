@@ -21953,12 +21953,12 @@
   },
   "project": {
     "restore": {
-      "projectUniqueName": "C:\\Users\\Amin Espinoza\\Documents\\Visual Studio 2017\\Projects\\ControlCasa\\CienteUniversal\\CienteUniversal.csproj",
+      "projectUniqueName": "C:\\Users\\Amin Espinoza\\Documents\\GitHub\\Control-casa\\Software\\ControlCasa\\CienteUniversal\\CienteUniversal.csproj",
       "projectName": "CienteUniversal",
-      "projectPath": "C:\\Users\\Amin Espinoza\\Documents\\Visual Studio 2017\\Projects\\ControlCasa\\CienteUniversal\\CienteUniversal.csproj",
-      "projectJsonPath": "C:\\Users\\Amin Espinoza\\Documents\\Visual Studio 2017\\Projects\\ControlCasa\\CienteUniversal\\project.json",
+      "projectPath": "C:\\Users\\Amin Espinoza\\Documents\\GitHub\\Control-casa\\Software\\ControlCasa\\CienteUniversal\\CienteUniversal.csproj",
+      "projectJsonPath": "C:\\Users\\Amin Espinoza\\Documents\\GitHub\\Control-casa\\Software\\ControlCasa\\CienteUniversal\\project.json",
       "packagesPath": "C:\\Users\\Amin Espinoza\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\Amin Espinoza\\Documents\\Visual Studio 2017\\Projects\\ControlCasa\\CienteUniversal\\obj\\",
+      "outputPath": "C:\\Users\\Amin Espinoza\\Documents\\GitHub\\Control-casa\\Software\\ControlCasa\\CienteUniversal\\obj\\",
       "projectStyle": "ProjectJson",
       "configFilePaths": [
         "C:\\Users\\Amin Espinoza\\AppData\\Roaming\\NuGet\\NuGet.Config",
